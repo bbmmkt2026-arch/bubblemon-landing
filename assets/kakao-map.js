@@ -105,7 +105,7 @@
     mapEl.style.cssText = "position:absolute;inset:0;width:100%;height:100%";
     container.appendChild(mapEl);
 
-    // (초기화면) 서울역 중심
+    // (초기화면) 명동역 중심
     var map = new kakao.maps.Map(mapEl, {
       center: new kakao.maps.LatLng(INIT_CENTER.lat, INIT_CENTER.lng),
       level: INIT_LEVEL,
@@ -238,7 +238,7 @@
       );
     };
 
-    // 레이아웃 보정 (컨테이너 크기 늦게 잡히는 경우) — 서울역 유지
+    // 레이아웃 보정 (컨테이너 크기 늦게 잡히는 경우) — 명동역 유지
     setTimeout(function () {
       map.relayout();
       map.setCenter(new kakao.maps.LatLng(INIT_CENTER.lat, INIT_CENTER.lng));
