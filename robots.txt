@@ -55,5 +55,22 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
+
 # 사이트맵
 Sitemap: https://wevapekorea.co.kr/sitemap.xml
+
+# LLM 안내 문서 (GEO): https://wevapekorea.co.kr/llms.txt
