@@ -22,61 +22,21 @@
       "bbm-brand-lead",
       "편의점에서 익숙했던 버블몬. 전국 484개 위베이프 매장에서 쌓은 경험을 그래피티-Ⅲ에 담았습니다."
     );
-    var proof = create("div", "bbm-brand-proof");
-    proof.setAttribute("aria-label", "전국 484개 위베이프 매장에서 쌓은 경험");
-    var number = create("span", "bbm-brand-count", "0");
-    number.dataset.target = "484";
-    number.setAttribute("aria-hidden", "true");
-    var value = create("strong", "bbm-brand-number");
-    value.setAttribute("aria-hidden", "true");
-    value.append(number, create("em", "", "개"));
-    proof.append(value, create("p", "", "전국 위베이프 매장에서 쌓은 경험"));
-
-    intro.append(title, lead, proof);
+    intro.append(title, lead);
     inner.appendChild(intro);
     section.appendChild(inner);
     return section;
   }
 
-  function countUp(section) {
-    var number = section.querySelector(".bbm-brand-count");
-    if (!number || number.dataset.counted === "true") return;
-
-    var target = Number(number.dataset.target) || 484;
-    number.dataset.counted = "true";
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      number.textContent = String(target);
-      section.classList.add("is-counted");
-      return;
-    }
-
-    var startedAt = 0;
-    var duration = 1700;
-    function tick(now) {
-      if (!startedAt) startedAt = now;
-      var progress = Math.min((now - startedAt) / duration, 1);
-      var eased = 1 - Math.pow(1 - progress, 4);
-      number.textContent = String(Math.round(target * eased));
-      if (progress < 1) {
-        window.requestAnimationFrame(tick);
-        return;
-      }
-      section.classList.add("is-counted");
-    }
-    window.requestAnimationFrame(tick);
-  }
-
   function reveal(section) {
     if (!("IntersectionObserver" in window)) {
       section.classList.add("is-visible");
-      countUp(section);
       return;
     }
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
         section.classList.add("is-visible");
-        countUp(section);
         observer.disconnect();
       });
     }, { threshold: 0.18, rootMargin: "0px 0px -10%" });
