@@ -45,7 +45,8 @@
       ".wvmap-ov:after{content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);border:8px solid transparent;border-top-color:#0b0b0c}" +
       ".wvmap-hl{outline:2px solid #caa263 !important;outline-offset:-2px;border-radius:12px}" +
       ".wvmap-locate{position:absolute;right:10px;bottom:28px;z-index:5;width:40px;height:40px;border-radius:8px;background:#fff;border:1px solid #bbb;cursor:pointer;font-size:18px;box-shadow:0 2px 6px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center}" +
-      ".wvmap-locate:hover{background:#f2f2f2}";
+      ".wvmap-locate:hover{background:#f2f2f2}" +
+      "@media(max-width:900px){.wvmap-locate{display:none}}";
     var st = document.createElement("style");
     st.id = "wvmap-css";
     st.textContent = css;
@@ -106,14 +107,26 @@
     container.appendChild(mapEl);
 
     // (초기화면) 명동역 중심
+    // 모바일 지도는 읽기 전용이다. 목록에서 매장을 선택할 때만
+    // 스크립트가 중심과 오버레이를 갱신하고, 직접 드래그/줌은 받지 않는다.
+    var isMobile = window.matchMedia("(max-width: 900px)").matches;
     var map = new kakao.maps.Map(mapEl, {
       center: new kakao.maps.LatLng(INIT_CENTER.lat, INIT_CENTER.lng),
       level: INIT_LEVEL,
+      draggable: !isMobile,
     });
 
+    if (isMobile) {
+      map.setZoomable(false);
+      mapEl.style.pointerEvents = "none";
+      mapEl.style.touchAction = "pan-y";
+    }
+
     // (6) 줌 / 지도타입 컨트롤
-    map.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
-    map.addControl(new kakao.maps.MapTypeControl(), kakao.maps.ControlPosition.TOPRIGHT);
+    if (!isMobile) {
+      map.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
+      map.addControl(new kakao.maps.MapTypeControl(), kakao.maps.ControlPosition.TOPRIGHT);
+    }
 
     // (2) 커스텀 골드 마커
     var pinImg = new kakao.maps.MarkerImage(STORE_PIN, new kakao.maps.Size(28, 38), {
