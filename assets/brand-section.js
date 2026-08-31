@@ -1,25 +1,6 @@
 (function () {
   "use strict";
 
-  var STORY = [
-    {
-      title: "익숙한 이름",
-      body: "편의점에서 한 번쯤 보셨을 이름, 버블몬입니다."
-    },
-    {
-      title: "위베이프로",
-      body: "그 버블몬이 위베이프라는 간판을 걸었습니다."
-    },
-    {
-      title: "전국 484곳",
-      body: "매장에서 고객을 만나고 현장의 목소리를 듣습니다."
-    },
-    {
-      title: "그래피티-Ⅲ",
-      body: "그렇게 매장에서 시작된 기준을 제품으로 만들었습니다."
-    }
-  ];
-
   function create(tag, className, text) {
     var node = document.createElement(tag);
     if (className) node.className = className;
@@ -34,62 +15,71 @@
 
     var inner = create("div", "bbm-brand-inner");
     var intro = create("div", "bbm-brand-intro");
-    var kicker = create("p", "bbm-brand-kicker", "BUBBLEMON × WEVAPE");
-    var logos = create("div", "bbm-brand-logos");
-    var bubblemon = document.createElement("img");
-    bubblemon.src = "./products/bubblemon-logo.webp";
-    bubblemon.alt = "BUBBLEMON";
-    bubblemon.loading = "lazy";
-    var link = create("span", "bbm-brand-link", "×");
-    link.setAttribute("aria-hidden", "true");
-    var wevape = document.createElement("img");
-    wevape.src = "./products/wevape-logo.webp";
-    wevape.alt = "WEVAPE";
-    wevape.loading = "lazy";
-    logos.append(bubblemon, link, wevape);
-
-    var title = create("h2", "", "버블몬이 만든\n위베이프");
+    var title = create("h2", "", "매장을 만든 경험으로,\n디바이스의 기준을 만듭니다.");
     title.id = "bbm-brand-title";
     var lead = create(
       "p",
       "bbm-brand-lead",
-      "익숙한 이름에서 시작해, 매장의 목소리를 다시 제품으로 만듭니다."
+      "편의점에서 익숙했던 버블몬. 전국 484개 위베이프 매장에서 쌓은 경험을 그래피티-Ⅲ에 담았습니다."
     );
     var proof = create("div", "bbm-brand-proof");
-    proof.append(
-      create("strong", "", "484"),
-      create("span", "", "전국 위베이프 매장")
-    );
-    intro.append(kicker, logos, title, lead, proof);
+    proof.setAttribute("aria-label", "전국 484개 위베이프 매장에서 쌓은 경험");
+    var number = create("span", "bbm-brand-count", "0");
+    number.dataset.target = "484";
+    number.setAttribute("aria-hidden", "true");
+    var value = create("strong", "bbm-brand-number");
+    value.setAttribute("aria-hidden", "true");
+    value.append(number, create("em", "", "개"));
+    proof.append(value, create("p", "", "전국 위베이프 매장에서 쌓은 경험"));
 
-    var list = create("ol", "bbm-brand-steps");
-    STORY.forEach(function (item, index) {
-      var row = create("li", "bbm-brand-step");
-      var number = create("span", "bbm-brand-step-number", String(index + 1).padStart(2, "0"));
-      number.setAttribute("aria-hidden", "true");
-      var copy = create("div", "bbm-brand-step-copy");
-      copy.append(create("h3", "", item.title), create("p", "", item.body));
-      row.append(number, copy);
-      list.appendChild(row);
-    });
-
-    inner.append(intro, list);
+    intro.append(title, lead, proof);
+    inner.appendChild(intro);
     section.appendChild(inner);
     return section;
+  }
+
+  function countUp(section) {
+    var number = section.querySelector(".bbm-brand-count");
+    if (!number || number.dataset.counted === "true") return;
+
+    var target = Number(number.dataset.target) || 484;
+    number.dataset.counted = "true";
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      number.textContent = String(target);
+      section.classList.add("is-counted");
+      return;
+    }
+
+    var startedAt = 0;
+    var duration = 1700;
+    function tick(now) {
+      if (!startedAt) startedAt = now;
+      var progress = Math.min((now - startedAt) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 4);
+      number.textContent = String(Math.round(target * eased));
+      if (progress < 1) {
+        window.requestAnimationFrame(tick);
+        return;
+      }
+      section.classList.add("is-counted");
+    }
+    window.requestAnimationFrame(tick);
   }
 
   function reveal(section) {
     if (!("IntersectionObserver" in window)) {
       section.classList.add("is-visible");
+      countUp(section);
       return;
     }
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
         section.classList.add("is-visible");
+        countUp(section);
         observer.disconnect();
       });
-    }, { threshold: 0.16 });
+    }, { threshold: 0.18, rootMargin: "0px 0px -10%" });
     observer.observe(section);
   }
 
@@ -107,15 +97,12 @@
       oldStory.setAttribute("aria-hidden", "true");
     }
 
-    storeTitle.textContent = "주변 위베이프 매장 찾기";
+    storeTitle.textContent = "주변 버블몬 매장 찾기";
     heading.classList.add("bbm-store-heading");
-    if (!heading.querySelector(".bbm-store-lead")) {
-      heading.appendChild(create(
-        "p",
-        "bbm-store-lead",
-        "매장명이나 주소를 검색하거나, 현재 위치에서 가까운 매장을 확인하세요."
-      ));
-    }
+    heading.hidden = true;
+    heading.setAttribute("aria-hidden", "true");
+    var storeLead = heading.querySelector(".bbm-store-lead");
+    if (storeLead) storeLead.remove();
 
     var brand = buildBrandSection();
     stores.parentNode.insertBefore(brand, stores);
