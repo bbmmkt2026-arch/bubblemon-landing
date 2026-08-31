@@ -862,3 +862,45 @@
   margin:0 0 16px;font-size:16px;font-weight:600;color:#f5f5f7;letter-spacing:-.01em}
 @media (width<=900px){
   .bbm-buy-lead{font-size:15px;margin-bottom:14px}}
+
+
+
+
+
+/* ===== 전환 인터랙션: 페이드 제거, 즉시 교체 ==============================
+   크로스페이드가 오히려 흐릿하게 읽혀 페이드를 걷어냈다.
+   컬러는 이미지가 즉시 바뀌고, 컨트롤은 페이스만 즉시 전환하며
+   카메라 이동(transform)은 기존 연출이므로 유지한다. */
+
+/* 1) 컬러 — 고스트 크로스페이드 비활성, 즉시 교체 */
+.bbm-color-ghost,
+.bbm-color-ghost.is-active,
+.bbm-color-ghost.is-active.is-leaving{
+  opacity:0!important;
+  transition:none!important}
+._colorProduct_fkv0c_100>img,
+._colorProduct_fkv0c_100>img.bbm-color-entering,
+._colorProduct_fkv0c_100>img.bbm-color-entering.is-ready{
+  opacity:1!important;
+  transform:none!important;
+  transition:none!important;
+  animation:none!important}
+
+/* 2) 컨트롤 — 활성 페이스만 노출(무조건 disp 를 띄우던 룰 정정) + 페이드 없음 */
+._controlVisual_fkv0c_150[data-face] .cv-face{
+  opacity:0;
+  transition:transform 1.05s cubic-bezier(.6,.04,.24,1)}
+._controlVisual_fkv0c_150[data-face="disp"] .cv-face[data-face="disp"],
+._controlVisual_fkv0c_150[data-face="front"] .cv-face[data-face="front"],
+._controlVisual_fkv0c_150[data-face="rear"] .cv-face[data-face="rear"]{
+  opacity:1;
+  transition:transform 1.05s cubic-bezier(.6,.04,.24,1)}
+
+._controlTab_fkv0c_141,._controlTabActive_fkv0c_143{
+  transition:background-color .3s ease,border-color .3s ease,color .3s ease}
+
+@media (prefers-reduced-motion:reduce){
+  ._controlVisual_fkv0c_150[data-face] .cv-face,
+  ._controlVisual_fkv0c_150[data-face="disp"] .cv-face[data-face="disp"],
+  ._controlVisual_fkv0c_150[data-face="front"] .cv-face[data-face="front"],
+  ._controlVisual_fkv0c_150[data-face="rear"] .cv-face[data-face="rear"]{transition:none!important}}
