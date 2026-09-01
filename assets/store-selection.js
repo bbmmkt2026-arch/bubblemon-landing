@@ -38,6 +38,9 @@
           (event) => {
             event.preventDefault();
             event.stopPropagation();
+            if (typeof gtag === "function") {
+              gtag("event", "store_select", { store_name: storeName });
+            }
             selectStoreOnMap(link);
           },
           true,

@@ -6,6 +6,15 @@
     <meta name="theme-color" content="#000000" />
     <meta name="format-detection" content="telephone=no" />
 
+    <!-- ============ Google tag (gtag.js) — GA4 ============ -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W4FLJFV6JB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-W4FLJFV6JB');
+    </script>
+
     <!-- ============ 색인 차단 (외부 검색 노출 안 함) ============ -->
     <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
 
@@ -50,7 +59,7 @@
     <script src="./assets/brand-section.js?v=8" defer></script>
     <script src="./assets/tech-enhancement.js?v=4" defer></script>
     <script src="./assets/color-transition.js?v=1" defer></script>
-    <script src="./assets/store-selection.js?v=1" defer></script>
+    <script src="./assets/store-selection.js?v=2" defer></script>
     <link rel="stylesheet" crossorigin href="./assets/style.css?v=22">
 
     <!-- ============ 성인 인증 게이트 (청소년보호법 제19조) ============ -->
@@ -187,6 +196,7 @@
         html.classList.add('bbm-locked');
 
         document.getElementById('bbm-gate-yes').addEventListener('click', function () {
+          if (typeof gtag === 'function') gtag('event', 'age_verified');
           unlock();
         });
 
