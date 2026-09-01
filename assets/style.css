@@ -481,7 +481,7 @@
 
 /* BATTERY · C-TYPE · KC — 기존 정보형 SVG를 제품 중심의 실사 카드로 교체한다. */
 ._coreMedia_fkv0c_74 img[src$="graffiti3-spec-battery.svg"],
-._coreMedia_fkv0c_74 img[src$="graffiti3-spec-charge-v3.webp"],
+._coreMedia_fkv0c_74 img[src$="graffiti3-spec-charge-v4.webp"],
 ._coreMedia_fkv0c_74 img[src$="graffiti3-spec-kc.svg"]{
   object-fit:cover;
   width:100%;
@@ -491,7 +491,7 @@
 ._coreMedia_fkv0c_74 img[src$="graffiti3-spec-battery.svg"]{
   content:url("../products/graffiti3-spec-battery-v2.webp");
   object-position:center 46%}
-._coreMedia_fkv0c_74 img[src$="graffiti3-spec-charge-v3.webp"]{
+._coreMedia_fkv0c_74 img[src$="graffiti3-spec-charge-v4.webp"]{
   object-position:center center}
 ._coreMedia_fkv0c_74 img[src$="graffiti3-spec-kc.svg"]{
   content:url("../products/graffiti3-spec-kc-v2.webp");
@@ -506,7 +506,7 @@
 @media (width<=900px){
   ._coreMedia_fkv0c_74 img[src$="graffiti3-spec-battery.svg"]{
     object-position:50% center}
-  ._coreMedia_fkv0c_74 img[src$="graffiti3-spec-charge-v3.webp"]{
+  ._coreMedia_fkv0c_74 img[src$="graffiti3-spec-charge-v4.webp"]{
     object-position:50% center}
   ._coreMedia_fkv0c_74 img[src$="graffiti3-spec-kc.svg"]{
     object-position:66% center}
