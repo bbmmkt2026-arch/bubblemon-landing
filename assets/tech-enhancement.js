@@ -3,7 +3,7 @@
   const CARD_TITLE = "DUAL-INJECTION";
   const CARD_BODY =
     "열 전달을 낮춘 이중사출 드립팁입니다. 더 위생적으로 사용할 수 있으며 롤리팟-J와 호환됩니다.";
-  const CARD_IMAGE = "./products/graffiti3-spec-dual-injection-v1.png";
+  const CARD_IMAGE = "./products/graffiti3-spec-pod-detach-v3.webp";
 
   let mountQueued = false;
 
@@ -72,7 +72,7 @@
       const image = document.createElement("img");
       image.loading = "lazy";
       image.src = CARD_IMAGE;
-      image.alt = "투명 캡과 블랙 코어를 이중사출로 완성한 그래피티-Ⅲ 드립팁";
+      image.alt = "본체에서 분리된 그래피티-Ⅲ 롤리팟-J 파드와 이중사출 드립팁";
 
       copy.append(title, body);
       media.append(image);

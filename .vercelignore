@@ -2,3 +2,4 @@
 *.pre*
 .DS_Store
 .env.txt
+_ref
