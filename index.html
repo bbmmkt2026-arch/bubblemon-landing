@@ -147,7 +147,7 @@
     </style>
   </head>
   <body>
-    <!-- 성인 인증 게이트: 기본 노출 상태로 두고, 인증 이력이 있을 때만 스크립트가 숨긴다 -->
+    <!-- 성인 인증 게이트: 방문할 때마다 기본 노출하고 현재 페이지에서만 인증한다 -->
     <div id="bbm-age-gate" role="dialog" aria-modal="true" aria-labelledby="bbm-gate-title">
       <div class="bbm-gate-card">
         <img src="/products/wevape-logo.webp" alt="버블몬 위베이프" />
@@ -176,27 +176,17 @@
 
     <script>
       (function () {
-        var KEY = 'bbm_age_verified_v1';
         var html = document.documentElement;
         var gate = document.getElementById('bbm-age-gate');
-
-        function store(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
-        function read(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
 
         function unlock() {
           gate.hidden = true;
           html.classList.remove('bbm-locked');
         }
 
-        if (read(KEY) === '1') {
-          unlock();
-          return;
-        }
-
         html.classList.add('bbm-locked');
 
         document.getElementById('bbm-gate-yes').addEventListener('click', function () {
-          store(KEY, '1');
           unlock();
         });
 
