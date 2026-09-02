@@ -1,8 +1,20 @@
-# robots.txt — 버블몬 · 위베이프 GRAFFITI-Ⅲ
-# https://wevapekorea.co.kr
-#
-# 외부 검색엔진 및 AI 크롤러 전면 차단. 이 사이트는 색인을 원하지 않습니다.
-# (색인 차단은 index.html 의 robots 메타태그와 vercel.json 의 X-Robots-Tag 로도 중복 적용)
-
 User-agent: *
-Disallow: /
+Allow: /
+Allow: /assets/brand-clean.css
+Allow: /products/bubblemon-logo.webp
+Allow: /products/wevape-logo.webp
+Allow: /media/og-brand.jpg
+Allow: /icons/
+Allow: /favicon.ico
+Allow: /sitemap.xml
+Disallow: /stores
+Disallow: /stores.html
+Disallow: /graffiti3
+Disallow: /graffiti3.html
+Disallow: /assets/
+Disallow: /data/
+Disallow: /products/
+Disallow: /videos/
+Disallow: /og-image.jpg
+
+Sitemap: https://wevapekorea.co.kr/sitemap.xml

@@ -1,0 +1,549 @@
+/* ==========================================================================
+   브랜드 랜딩 오버레이  (/brand)
+   --------------------------------------------------------------------------
+   같은 번들(app.js)을 쓰되, 제품 표시 구간만 걷어내고 브랜드/매장 구간만
+   남긴다. 네이버 검색광고 adguide/282(성인사이트 청소년 접근제한) 는
+   "성인콘텐츠를 홍보하는 정보가 성인인증 이전에 노출" 되는 것을 막는 조항이라,
+   광고 연결 URL 에서는 청소년유해물건(전자담배 기기장치류) 자체를 화면에
+   그리지 않는 것이 요건 충족의 출발점이다.
+
+   전부 html[data-bbm-page="brand"] 스코프 안에 둔다 —
+   이 파일이 실수로 제품 페이지(index.html)에 물려도 아무 일도 일어나지 않게.
+
+   ⚠ 지우는 게 아니라 숨긴다. app.js 는 빌드 산출물이라 DOM 을 제거하면
+     React 재조정에서 터질 수 있다. display:none 은 페인트 전에 적용되므로
+     깜빡임도 없다.
+   ========================================================================== */
+
+/* --- 1) 제품 표시 구간 제거 -------------------------------------------------
+   §핵심은 기술(스펙) · §네 가지 컬러 · §컬러 영상 · §복잡할 필요가 없습니다(조작)
+   → 여기가 청소년유해물건의 '표시'에 해당하는 전부다. */
+html[data-bbm-page="brand"] section[aria-labelledby="core-title"],
+html[data-bbm-page="brand"] section[aria-labelledby="color-title"],
+html[data-bbm-page="brand"] section[aria-label="그래피티 III 네 가지 컬러 영상"],
+html[data-bbm-page="brand"] section[aria-labelledby="control-title"] {
+  display: none !important;
+}
+
+/* 최상단 제품 페이지 헤더와 추가 브랜드 스토리 블록만 제거한다.
+   중간 브랜드 히어로는 WEVAPE 서브 / BUBBLEMON 메인으로 다시 구성한다. */
+html[data-bbm-page="brand"] header,
+html[data-bbm-page="brand"] .bbm-brand-section {
+  display: none !important;
+}
+
+/* --- 2) 브랜드 히어로 ------------------------------------------------------- */
+html[data-bbm-page="brand"] #top {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 66svh !important;
+  padding: 68px 0 34px !important;
+}
+html[data-bbm-page="brand"] #top > div:last-of-type { display: none !important; } /* heroProduct */
+html[data-bbm-page="brand"] #top [class*="heroText"] {
+  position: relative;
+  z-index: 2;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1560px;
+  margin: 0 auto;
+  padding: 0 4vw;
+  text-align: center;
+}
+
+.bbm-hero-wevape-logo {
+  width: clamp(122px, 11vw, 188px);
+  height: auto;
+  margin-bottom: clamp(42px, 6vh, 76px);
+  object-fit: contain;
+}
+
+.bbm-hero-bubblemon-logo {
+  display: block;
+  width: min(88vw, 1420px);
+  height: auto;
+  filter: brightness(0) invert(1);
+}
+
+/* 히어로 ↔ 브랜드 섹션 사이가 뜬다(76+154=230px). 양쪽에서 조금씩 줄인다. */
+html[data-bbm-page="brand"] .bbm-brand-section {
+  padding-top: 112px !important;
+  visibility: hidden;
+}
+html[data-bbm-page="brand"][data-bbm-ready="true"] .bbm-brand-section {
+  visibility: visible;
+}
+
+.bbm-hero-lead {
+  max-width: 620px;
+  margin: clamp(46px, 7vh, 78px) auto 0;
+  color: #a1a1a6;
+  font-size: clamp(17px, 1.35vw, 22px);
+  font-weight: 550;
+  line-height: 1.66;
+  white-space: pre-line;
+  word-break: keep-all;
+}
+
+/* --- 3) 교체 전 원본 구매 문구 가리기 -------------------------------------- */
+html[data-bbm-page="brand"] aside[aria-label="스마트스토어 구매"] > div:first-child > span {
+  visibility: hidden;
+}
+html[data-bbm-page="brand"][data-bbm-ready="true"] aside[aria-label="스마트스토어 구매"] > div:first-child > span {
+  visibility: visible;
+}
+
+/* --- 4) 브랜드 서사 + 지도/매장 구간 접기 ---------------------------------
+   기본 상태는 히어로만 보인다. "내 주변 매장 찾기"를 눌러야 펼쳐진다.
+   토글 상태는 <html data-bbm-stores="open"> 에 실린다. */
+html[data-bbm-page="brand"]:not([data-bbm-stores="open"]) #stores {
+  display: none !important;
+}
+
+.bbm-stores-toggle-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 18px 6.25vw 88px;
+  background: #000;
+}
+html[data-bbm-page="brand"][data-bbm-stores="open"] .bbm-stores-toggle-wrap {
+  padding-bottom: 48px;
+}
+
+.bbm-stores-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 58px;
+  padding: 0 34px;
+  border: 1px solid #caa26359;
+  border-radius: 999px;
+  background: none;
+  color: #f5f5f7;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  cursor: pointer;
+  transition: border-color 0.25s, background 0.25s, transform 0.25s;
+}
+.bbm-stores-toggle:hover {
+  background: #caa2631f;
+  border-color: #caa263;
+  transform: translateY(-2px);
+}
+.bbm-stores-toggle:focus-visible { outline: 2px solid #caa263; outline-offset: 3px; }
+.bbm-stores-toggle b {
+  color: #caa263;
+  font-size: 1.05em;
+  transition: transform 0.25s;
+}
+html[data-bbm-page="brand"][data-bbm-stores="open"] .bbm-stores-toggle b {
+  transform: rotate(180deg);
+}
+
+.bbm-stores-count {
+  margin: 0;
+  color: #77777d;
+  font-size: 13px;
+  font-weight: 560;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+
+/* --- 브랜드 연결성 + 신뢰 근거 ------------------------------------------- */
+.bbm-brand-bridge {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 42px;
+  color: #8e8e93;
+  font-size: 13px;
+  font-weight: 760;
+  letter-spacing: 0.15em;
+}
+.bbm-brand-bridge i {
+  width: clamp(42px, 5vw, 76px);
+  height: 1px;
+  background: linear-gradient(90deg, #56565b, #caa263);
+  position: relative;
+}
+.bbm-brand-bridge i::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-top: 1px solid #caa263;
+  border-right: 1px solid #caa263;
+  position: absolute;
+  top: -3px;
+  right: 0;
+  transform: rotate(45deg);
+}
+.bbm-brand-bridge strong {
+  color: #e7bd79;
+  font-size: 15px;
+  letter-spacing: 0.12em;
+}
+
+.bbm-brand-proof {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 76px;
+}
+.bbm-brand-proof-card {
+  min-height: 286px;
+  padding: 30px;
+  border: 1px solid #ffffff14;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 88% 10%, #caa26312, transparent 36%),
+    #121214;
+  display: flex;
+  flex-direction: column;
+}
+.bbm-brand-proof-card > small {
+  color: #caa263;
+  font-size: 11px;
+  font-weight: 760;
+  letter-spacing: 0.16em;
+}
+.bbm-brand-proof-value {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  min-height: 78px;
+  margin: 22px 0 0;
+  color: #f5f5f7;
+  line-height: 1;
+}
+.bbm-brand-proof-value strong {
+  font-size: clamp(34px, 3.5vw, 58px);
+  font-weight: 720;
+  letter-spacing: -0.055em;
+}
+.bbm-brand-proof-value span {
+  padding-bottom: 7px;
+  color: #9a9a9f;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+.bbm-brand-proof-card h3 {
+  margin: auto 0 0;
+  color: #f5f5f7;
+  font-size: clamp(19px, 1.5vw, 24px);
+  font-weight: 680;
+  letter-spacing: -0.035em;
+}
+.bbm-brand-proof-copy {
+  margin: 10px 0 0;
+  color: #8e8e93;
+  font-size: 14px;
+  font-weight: 550;
+  line-height: 1.55;
+  word-break: keep-all;
+}
+
+/* --- 5) 하단 §정품구매 : 블록 전체 제거, 사업자정보 푸터만 남긴다 -----------
+   하단 고정바가 "정품 구매하기"를 상시 노출하므로 같은 CTA를 두 번 둘 이유가 없다.
+   제품컷·제품카피는 어차피 나가야 하는 것이고, 남는 건 푸터뿐이라
+   섹션 자체의 여백(118px + footer margin-top 154px)도 같이 걷는다. */
+html[data-bbm-page="brand"] #buy > [class*="comboHead"],
+html[data-bbm-page="brand"] #buy > .g3-close-visual,
+html[data-bbm-page="brand"] #buy > [class*="comboAction"] {
+  display: none !important;
+}
+html[data-bbm-page="brand"] #buy { padding-top: 0 !important; }
+html[data-bbm-page="brand"] #buy > footer { margin-top: 0 !important; }
+html[data-bbm-page="brand"] #stores { scroll-margin-top: 64px; }
+
+/* 푸터에서도 브랜드명은 글자가 아니라 공식 BUBBLEMON 워드마크로 보여준다. */
+html[data-bbm-page="brand"] .bbm-footer-bubblemon-logo {
+  width: clamp(160px, 17vw, 220px) !important;
+  height: auto !important;
+  filter: brightness(0) invert(1) !important;
+}
+html[data-bbm-page="brand"] .bbm-footer-site-label {
+  color: #8e8e93 !important;
+}
+
+/* --- 6) 하단 고정 구매바: 카운트다운만 걷어낸다 ------------------------------
+   바 자체는 살린다 — 외부 스토어로 나가는 링크는 등록기준상 제한 대상이 아니다.
+   문제는 "당일 배송 주문 마감" 카운트다운이다. 판매 촉박감은 브랜드 페이지를
+   통신판매 사이트로 읽히게 만드는 가장 강한 신호라 이것만 제거한다.
+   원본 그리드(1fr 245px = [카운트다운 | 버튼])는 그대로 둔다 — 버튼을 풀폭으로
+   늘리면 주황 바가 화면을 가로질러 브랜드 톤에서 너무 세게 튄다.
+   왼쪽 칸은 비우지 않고 정품 소구 문구로 채운다(문구 교체는 brand-page.js). */
+html[data-bbm-page="brand"] aside[aria-label="스마트스토어 구매"] > div:first-child > div,
+html[data-bbm-page="brand"] aside[aria-label="스마트스토어 구매"] > div:first-child > strong {
+  display: none !important; /* 시계(clockCompact) · "오늘 마감되었습니다"(ended) */
+}
+html[data-bbm-page="brand"] aside[aria-label="스마트스토어 구매"] > div:first-child > span {
+  color: #d2d2d7 !important;
+  font-weight: 650 !important;
+}
+/* main 의 padding-bottom(104/116px)은 이 바가 푸터를 가리지 않게 하는 여백이므로
+   원본 값을 그대로 둔다. */
+
+/* --- 공식 스토어 도크 ---------------------------------------------------- */
+html[data-bbm-page="brand"] .bbm-store-dock {
+  left: 50% !important;
+  right: auto !important;
+  bottom: 18px !important;
+  width: min(92vw, 840px) !important;
+  min-height: 78px !important;
+  height: auto !important;
+  padding: 8px !important;
+  border: 1px solid #caa26347 !important;
+  border-radius: 24px !important;
+  background: #171719e8 !important;
+  -webkit-backdrop-filter: blur(24px) saturate(150%) !important;
+  backdrop-filter: blur(24px) saturate(150%) !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  gap: 10px !important;
+  transform: translateX(-50%) !important;
+  box-shadow: 0 20px 60px #000000ad, 0 0 30px #caa26314, inset 0 1px 0 #ffffff12 !important;
+  transition: opacity 0.25s, transform 0.3s cubic-bezier(.28,.11,.32,1) !important;
+}
+html[data-bbm-page="brand"] .bbm-store-dock > div:first-child {
+  min-width: 0;
+  height: auto !important;
+  padding: 0 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+}
+.bbm-store-dock-copy-text {
+  min-width: 0;
+  overflow: hidden;
+  color: #f5f5f7 !important;
+  font-size: 15px;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  align-items: center;
+  column-gap: 14px;
+  row-gap: 4px;
+}
+.bbm-store-dock-copy-text::before {
+  content: "OFFICIAL STORE";
+  grid-row: 1 / 3;
+  align-self: center;
+  padding: 7px 9px;
+  border: 1px solid #caa26352;
+  border-radius: 999px;
+  color: #d9ad68;
+  background: #caa2630f;
+  font-size: 10px;
+  font-weight: 780;
+  letter-spacing: 0.11em;
+  white-space: nowrap;
+}
+.bbm-store-dock-copy-text::after {
+  content: "정품은 공식 판매처에서 확인하세요";
+  grid-column: 2;
+  overflow: hidden;
+  color: #8e8e93;
+  font-size: 12px;
+  font-weight: 560;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+html[data-bbm-page="brand"] .bbm-store-dock > a {
+  position: relative !important;
+  width: auto !important;
+  min-width: 230px !important;
+  height: 64px !important;
+  padding: 0 24px !important;
+  overflow: hidden !important;
+  border: 1px solid #fff8e0b3 !important;
+  border-radius: 19px !important;
+  color: #0b0b0c !important;
+  background: linear-gradient(135deg, #fff0c7 0%, #e9bd6c 48%, #c98e38 100%) !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  font-size: clamp(16px, 1.25vw, 18px) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em;
+  box-shadow: inset 0 1px 0 #ffffffc7, 0 10px 30px #caa26357 !important;
+  transition: filter 0.2s, transform 0.2s, box-shadow 0.2s !important;
+}
+html[data-bbm-page="brand"] .bbm-store-dock > a:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px 0 #ffffffd6, 0 14px 36px #caa26370 !important;
+}
+html[data-bbm-page="brand"] .bbm-store-dock > a:active {
+  transform: translateY(0) scale(0.985);
+}
+html[data-bbm-page="brand"][data-bbm-dock-at-end="true"] .bbm-store-dock,
+html[data-bbm-page="brand"][data-bbm-store-input-focus="true"] .bbm-store-dock {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, calc(100% + 28px)) !important;
+}
+
+/* 푸터 직전에는 고정 도크가 이 CTA로 자연스럽게 이어진다. */
+.bbm-store-endcap {
+  width: min(87.5vw, 1400px);
+  margin: 0 auto;
+  padding: 54px;
+  border: 1px solid #ffffff17;
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at 82% 18%, #caa26324, transparent 34%),
+    linear-gradient(135deg, #171719, #0c0c0d);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 48px;
+}
+.bbm-store-endcap-copy small {
+  color: #caa263;
+  font-size: 11px;
+  font-weight: 760;
+  letter-spacing: 0.15em;
+}
+.bbm-store-endcap-copy h2 {
+  max-width: 720px;
+  margin: 18px 0 0;
+  color: #f5f5f7;
+  font-size: clamp(38px, 4.2vw, 68px);
+  font-weight: 650;
+  letter-spacing: -0.06em;
+  line-height: 1.05;
+  word-break: keep-all;
+}
+.bbm-store-endcap-copy p {
+  max-width: 620px;
+  margin: 20px 0 0;
+  color: #9a9a9f;
+  font-size: 16px;
+  font-weight: 550;
+  line-height: 1.6;
+  word-break: keep-all;
+}
+.bbm-store-endcap-link {
+  min-width: 220px;
+  min-height: 64px;
+  padding: 0 26px;
+  border-radius: 18px;
+  color: #0b0b0c !important;
+  background: linear-gradient(115deg, #ead09f, #caa263 62%, #b98b45);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 15px;
+  font-weight: 760;
+  letter-spacing: -0.02em;
+  box-shadow: inset 0 1px 0 #ffffff70, 0 14px 36px #0000005c;
+  transition: filter 0.2s, transform 0.2s;
+}
+.bbm-store-endcap-link:hover {
+  filter: brightness(1.06);
+  transform: translateY(-2px);
+}
+
+/* --- 7) 청소년유해표시 (adguide/262 ⑤) — 푸터 배치 --------------------------
+   style.css 원본은 가운데 정렬 + 골드 헤어라인이라 좌측 정렬 푸터에서 뜬다.
+   문구와 19 도안은 그대로 두고 배치만 푸터에 맞춘다. */
+html[data-bbm-page="brand"] .bbm-youth-footer {
+  justify-content: flex-start;
+  max-width: none;
+  margin: 0 0 4px;
+  padding: 0;
+  border-top: 0;
+  gap: 9px;
+}
+html[data-bbm-page="brand"] .bbm-youth-footer::before { display: none; }
+
+/* --- 8) 모바일 ------------------------------------------------------------- */
+@media (max-width: 900px) {
+  html[data-bbm-page="brand"] #top {
+    min-height: 52svh !important;
+    padding: 56px 0 24px !important;
+  }
+  .bbm-hero-wevape-logo { width: 118px; margin-bottom: 42px; }
+  .bbm-hero-bubblemon-logo { width: 88vw; }
+  .bbm-hero-lead { margin-top: 42px; font-size: 16px; max-width: 340px; }
+  .bbm-stores-toggle-wrap { gap: 10px; padding: 8px 22px 62px; }
+  html[data-bbm-page="brand"][data-bbm-stores="open"] .bbm-stores-toggle-wrap { padding-bottom: 40px; }
+  .bbm-stores-toggle { min-height: 54px; padding: 0 28px; font-size: 15px; }
+  .bbm-stores-count { font-size: 12px; }
+  html[data-bbm-page="brand"] #buy { padding-top: 0 !important; }
+  html[data-bbm-page="brand"] .bbm-footer-bubblemon-logo { width: 156px !important; }
+
+  html[data-bbm-page="brand"] .bbm-store-dock {
+    bottom: max(10px, env(safe-area-inset-bottom)) !important;
+    width: calc(100vw - 24px) !important;
+    min-height: 0 !important;
+    padding: 10px !important;
+    border-radius: 22px !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: auto 72px !important;
+    gap: 8px !important;
+  }
+  html[data-bbm-page="brand"] .bbm-store-dock > div:first-child {
+    padding: 7px 10px 4px !important;
+    gap: 0 !important;
+  }
+  .bbm-store-dock-copy-text {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 5px;
+    font-size: 15px;
+    line-height: 1.25;
+  }
+  .bbm-store-dock-copy-text::before { display: none; }
+  .bbm-store-dock-copy-text::after {
+    display: block;
+    grid-column: 1;
+    font-size: 12px;
+    line-height: 1.35;
+  }
+  html[data-bbm-page="brand"] .bbm-store-dock > a {
+    min-width: 0 !important;
+    width: 100% !important;
+    height: 72px !important;
+    padding: 0 20px !important;
+    border-radius: 18px !important;
+    font-size: clamp(17px, 4.8vw, 19px) !important;
+    font-weight: 800 !important;
+  }
+
+  /* 두 단으로 커진 고정 도크가 마지막 사업자정보를 가리지 않게 한다. */
+  html[data-bbm-page="brand"] #root > main { padding-bottom: 174px !important; }
+
+  .bbm-store-endcap {
+    width: calc(100% - 44px);
+    padding: 30px 24px 24px;
+    border-radius: 24px;
+    grid-template-columns: 1fr;
+    align-items: stretch;
+    gap: 28px;
+  }
+  .bbm-store-endcap-copy h2 { margin-top: 14px; font-size: 36px; }
+  .bbm-store-endcap-copy p { margin-top: 16px; font-size: 14px; }
+  .bbm-store-endcap-link { width: 100%; min-height: 58px; }
+}
+
+@media (max-width: 390px) {
+  .bbm-store-dock-copy-text::after { display: block; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-bbm-page="brand"] .bbm-store-dock,
+  html[data-bbm-page="brand"] .bbm-store-dock > a,
+  .bbm-store-endcap-link { transition: none !important; }
+}
