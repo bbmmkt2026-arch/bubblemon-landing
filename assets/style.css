@@ -797,6 +797,23 @@
 @media (width<=900px){
   .bbm-buy-lead{font-size:15px;margin-bottom:14px}}
 
+/* --- 큰 섹션 설명: 제품 기능을 실제 사용 경험과 연결 ---------------------- */
+.bbm-section-detail{
+  margin:28px 0 0;color:#a1a1a6;letter-spacing:-.025em;
+  font-size:clamp(17px,1.3vw,22px);font-weight:500;line-height:1.65}
+.bbm-section-detail>span{display:block;max-width:820px}
+.bbm-section-detail--wide{
+  width:min(87.5vw,1400px);margin:28px auto 0}
+.bbm-section-detail.bbm-section-detail--center{
+  margin:28px auto 0;color:#a1a1a6;text-align:center;letter-spacing:-.025em;
+  font-size:clamp(17px,1.3vw,22px);font-weight:500;line-height:1.65}
+.bbm-section-detail--center>span{max-width:780px;margin:0 auto}
+@media (width<=900px){
+  .bbm-section-detail{margin-top:21px;font-size:16px;line-height:1.65}
+  .bbm-section-detail--wide{width:87.5vw;margin-left:auto;margin-right:auto}
+  .bbm-section-detail.bbm-section-detail--center{
+    margin-top:21px;font-size:16px;line-height:1.65}}
+
 
 
 

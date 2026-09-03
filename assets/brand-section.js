@@ -32,7 +32,7 @@
     var lead = create(
       "p",
       "bbm-brand-lead",
-      "편의점에서 익숙했던 버블몬. 전국 484개 위베이프 매장에서 쌓은 경험을 그래피티-Ⅲ에 담았습니다."
+      "편의점에서 익숙했던 버블몬. 전국 484개 위베이프 매장에서 쌓은 경험을 버블몬 Graffiti-III에 담아, 조작부터 휴대와 관리까지 실제 사용에 필요한 편의를 고민했습니다."
     );
     intro.append(title, lead);
     inner.appendChild(intro);
