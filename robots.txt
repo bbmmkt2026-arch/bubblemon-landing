@@ -16,4 +16,4 @@ Disallow: /products/
 Disallow: /videos/
 Disallow: /og-image.jpg
 
-Sitemap: https://wevapekorea.co.kr/sitemap.xml
+Sitemap: https://www.bbmbrand.store/sitemap.xml
