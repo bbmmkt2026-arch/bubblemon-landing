@@ -8,6 +8,18 @@
     return node;
   }
 
+  function updateBrandLogos() {
+    var headerLogo = document.querySelector('header a[href="#top"] img');
+    if (headerLogo) {
+      headerLogo.src = "/products/bubblemon-logo.webp";
+      headerLogo.alt = "버블몬 BUBBLEMON";
+    }
+
+    document.querySelectorAll('img[src*="bubblemon-logo.webp"]').forEach(function (logo) {
+      logo.alt = "버블몬 BUBBLEMON";
+    });
+  }
+
   function buildBrandSection() {
     var section = create("section", "bbm-brand-section");
     section.id = "brand";
@@ -44,6 +56,8 @@
   }
 
   function mount() {
+    updateBrandLogos();
+
     var stores = document.getElementById("stores");
     if (!stores || stores.dataset.brandSplit === "true") return Boolean(stores);
 

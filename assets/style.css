@@ -118,20 +118,13 @@
   ._controlVisual_fkv0c_150{grid-column:3}
 }
 
-/* --- 헤더 좌측 상단 로고: 버블몬 워드마크 → 위베이프 -------------------
-   버블몬 로고는 6430x705 (9.1:1) 라 width:90px 이면 높이 10px 로 앉는다.
-   위베이프는 720x238 (3.03:1) 이라 같은 width 를 주면 높이 30px —
-   52px 헤더를 꽉 채워 시각 무게가 완전히 달라진다. 그래서 폭이 아니라
-   높이로 잡는다 (18px / 모바일 16px).
-   filter:brightness(0)invert() 는 해제한다 — 위베이프 로고는 이미
-   흰 레터마크 + 노란 V 체크이고, 필터를 걸면 브랜드 액센트인 V 가
-   흰색으로 뭉개진다 */
+/* --- 헤더 좌측 상단 버블몬 워드마크 ----------------------------------- */
 ._header_fkv0c_26 a img{
-  filter:none;
-  width:auto;
-  height:26px}
+  filter:brightness(0) invert(1);
+  width:clamp(118px,9.2vw,144px);
+  height:auto}
 @media (width<=900px){
-  ._header_fkv0c_26 a img{width:auto;height:22px}
+  ._header_fkv0c_26 a img{width:112px;height:auto}
 }
 
 /* --- 매장 찾기 레이아웃 재구성 (좌: 검색→지역필터→리스트 / 우: 지도) ---------

@@ -1,15 +1,24 @@
 // 호스트 기반 라우팅
-// - wevapekorea.co.kr / www.wevapekorea.co.kr 로 루트(/) 접속 시 graffiti3.html 을 서빙(URL 유지)
-// - 그 외 도메인(bbmbrand.store 등)은 그대로 index.html
-// matcher 를 '/' 로 제한해 루트에서만 동작 → 에셋·다른 경로·다른 도메인엔 영향 없음.
+// - wevapekorea.co.kr: 전용 랜딩, robots.txt, sitemap.xml 제공
+// - 그 외 도메인(bbmbrand.store 등): 기존 index.html 및 검색 설정 유지
 // 정적 프로젝트(의존성 없음)라 @vercel/edge 대신 Edge 미들웨어 프로토콜 헤더를 직접 사용.
-export const config = { matcher: '/' };
+export const config = { matcher: ['/', '/robots.txt', '/sitemap.xml'] };
 
 export default function middleware(request) {
   const host = (request.headers.get('host') || '').toLowerCase();
+  const url = new URL(request.url);
+
   if (host === 'wevapekorea.co.kr' || host === 'www.wevapekorea.co.kr') {
-    const url = new URL(request.url);
-    url.pathname = '/graffiti3'; // cleanUrls:true → .html 대신 clean 경로로 rewrite
+    if (url.pathname === '/') {
+      url.pathname = '/graffiti3'; // cleanUrls:true → .html 대신 clean 경로로 rewrite
+    } else if (url.pathname === '/robots.txt') {
+      url.pathname = '/robots-wevapekorea.txt';
+    } else if (url.pathname === '/sitemap.xml') {
+      url.pathname = '/sitemap-wevapekorea.xml';
+    } else {
+      return new Response(null, { headers: { 'x-middleware-next': '1' } });
+    }
+
     return new Response(null, {
       headers: { 'x-middleware-rewrite': url.toString() },
     });
