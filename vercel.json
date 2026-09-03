@@ -1,18 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
-  "rewrites": [
-    {
-      "source": "/",
-      "has": [{ "type": "host", "value": "www.wevapekorea.co.kr" }],
-      "destination": "/graffiti3.html"
-    },
-    {
-      "source": "/",
-      "has": [{ "type": "host", "value": "wevapekorea.co.kr" }],
-      "destination": "/graffiti3.html"
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",
