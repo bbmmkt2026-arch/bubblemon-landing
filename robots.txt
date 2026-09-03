@@ -1,9 +1,8 @@
 User-agent: *
 Allow: /
 Allow: /assets/brand-clean.css
-Allow: /products/bubblemon-logo.webp
 Allow: /products/wevape-logo.webp
-Allow: /media/og-brand.jpg
+Allow: /media/og-home-v2.png
 Allow: /icons/
 Allow: /favicon.ico
 Allow: /sitemap.xml
