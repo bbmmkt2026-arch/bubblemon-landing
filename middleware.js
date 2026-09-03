@@ -9,7 +9,7 @@ export default function middleware(request) {
   const host = (request.headers.get('host') || '').toLowerCase();
   if (host === 'wevapekorea.co.kr' || host === 'www.wevapekorea.co.kr') {
     const url = new URL(request.url);
-    url.pathname = '/graffiti3.html';
+    url.pathname = '/graffiti3'; // cleanUrls:true → .html 대신 clean 경로로 rewrite
     return new Response(null, {
       headers: { 'x-middleware-rewrite': url.toString() },
     });
