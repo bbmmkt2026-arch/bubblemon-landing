@@ -1,7 +1,5 @@
 User-agent: *
 Allow: /
-Allow: /naver
-Allow: /naver.html
 Allow: /assets/brand-clean.css
 Allow: /assets/brand-premium.css
 Allow: /assets/brand-premium.js
