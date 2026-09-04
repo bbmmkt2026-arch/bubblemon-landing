@@ -1,6 +1,14 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/naver",
+      "has": [{ "type": "host", "value": "(?:www\\.)?bbmbrand\\.store" }],
+      "destination": "https://www.bbmkr.store/",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
