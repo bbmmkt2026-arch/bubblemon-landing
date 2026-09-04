@@ -1,11 +1,11 @@
-# 배포 구조 — 2트랙
+# 배포 구조 — 도메인별 2트랙
 
-이 저장소는 **하나의 번들로 두 개의 랜딩**을 서비스한다.
+이 저장소는 **하나의 Vercel 번들로 두 개의 랜딩**을 서비스한다.
 
-| 경로 | 파일 | 성격 | 색인 | 성인 게이트 |
+| 운영 주소 | 파일 | 성격 | 색인 | 성인 게이트 |
 |---|---|---|---|---|
-| `/` | `index.html` | **기존 메인 랜딩** — 버블몬 브랜드와 공식 스토어 연결 | 허용 | 없음 |
-| `/naver` | `naver.html` | **네이버 광고 랜딩** — 브랜드 서사·운영·전국 네트워크·연혁 | 허용 | 없음 |
+| `https://www.bbmbrand.store/` | `index.html` | **기존 메인 랜딩** — 버블몬 브랜드와 공식 스토어 연결 | 허용 | 없음 |
+| `https://www.bbmkr.store/` | `naver.html` | **네이버 광고 랜딩** — 브랜드 서사·운영·전국 네트워크·연혁 | 허용 | 없음 |
 
 ## 왜 나눴나
 
@@ -35,32 +35,26 @@ naver.html
   media/brand-story/
 ```
 
-Vercel의 `cleanUrls` 설정으로 실제 주소는 `/naver`를 사용한다. 메인 `index.html`과는
-구조가 분리되어 있어 광고 랜딩을 수정해도 기존 메인 화면에는 영향을 주지 않는다.
+`middleware.js`가 요청 호스트를 확인해 `bbmkr.store`의 루트를 내부적으로 `/naver`에
+연결한다. `bbmbrand.store/naver`는 새 광고 도메인의 루트로 영구 이동하며, 메인
+`index.html`과 구조가 분리되어 있어 광고 랜딩을 수정해도 기존 메인 화면에는 영향을 주지 않는다.
 
-## 도메인 2개로 나눌 때
+## 도메인별 검색 설정
 
-광고 랜딩을 새로운 도메인의 루트로 서비스하려면 **한 Vercel 프로젝트 + 호스트 조건부 rewrite**를 사용할 수 있다.
+호스트별 루트·robots·sitemap 연결은 `middleware.js`의 `HOST_ROUTES`에서 관리한다.
 
-```jsonc
-// vercel.json
-"rewrites": [
-  {
-    "source": "/",
-    "has": [{ "type": "host", "value": "브랜드도메인.co.kr" }],
-    "destination": "/naver.html"
-  }
-]
+```text
+bbmbrand.store /       -> index.html
+bbmkr.store /          -> naver.html
+bbmkr.store robots.txt -> robots-bbmkr.txt
+bbmkr.store sitemap.xml -> sitemap-bbmkr.xml
 ```
 
-같이 손봐야 하는 것 — **도메인을 정한 뒤에 반드시 확인할 것:**
+광고 랜딩의 대표 주소는 `https://www.bbmkr.store/`다. 다음 항목은 항상 이 주소로 맞춘다.
 
-1. **`vercel.json`의 검색 차단 헤더** — 새 도메인 루트에 `noindex`가 적용되지 않는지 확인한다.
-2. **`naver.html`의 `canonical`·`og:url`** — 새 광고 도메인 주소로 변경한다.
-3. **`robots.txt`** — 도메인별로 다른 내용을 줄 수 없다. 프로젝트를 분리하거나 rewrite로 갈라야 한다.
-
-프로젝트를 아예 둘로 나누는 방법도 있다. 이 경우 `data/`·`products/`·`videos/`·`assets/`가
-양쪽에 중복되지만(약 60MB) 설정이 서로 간섭하지 않는다는 장점이 있다.
+1. `naver.html`의 canonical·Open Graph·Twitter·구조화 데이터 URL
+2. `robots-bbmkr.txt`의 Sitemap 주소
+3. `sitemap-bbmkr.xml`의 페이지 주소
 
 ## 복원
 
