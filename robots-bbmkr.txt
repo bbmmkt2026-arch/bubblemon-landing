@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Allow: /assets/brand-clean.css
 Allow: /assets/brand-premium.css
 Allow: /assets/brand-premium.js
 Allow: /media/og-home-v2.png
@@ -11,6 +10,10 @@ Allow: /videos/brand-film.mp4
 Allow: /icons/
 Allow: /favicon.ico
 Allow: /sitemap.xml
+Disallow: /naver
+Disallow: /naver.html
+Disallow: /brand
+Disallow: /brand.html
 Disallow: /stores
 Disallow: /stores.html
 Disallow: /graffiti3
@@ -21,4 +24,4 @@ Disallow: /products/
 Disallow: /videos/
 Disallow: /og-image.jpg
 
-Sitemap: https://www.bbmbrand.store/sitemap.xml
+Sitemap: https://www.bbmkr.store/sitemap.xml
