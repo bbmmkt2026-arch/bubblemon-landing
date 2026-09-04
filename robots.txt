@@ -1,7 +1,15 @@
 User-agent: *
 Allow: /
+Allow: /naver
+Allow: /naver.html
 Allow: /assets/brand-clean.css
+Allow: /assets/brand-premium.css
+Allow: /assets/brand-premium.js
 Allow: /media/og-home-v2.png
+Allow: /media/brand-story/
+Allow: /products/bubblemon-logo.webp
+Allow: /products/wevape-logo.webp
+Allow: /videos/brand-film.mp4
 Allow: /icons/
 Allow: /favicon.ico
 Allow: /sitemap.xml
