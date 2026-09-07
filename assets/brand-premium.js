@@ -247,7 +247,7 @@
 
   if (finePointer && !reducedMotion) {
     const interactiveFrames = [
-      ...document.querySelectorAll('.story-stage, .evidence-card, .network-reel figure, .ceo-image')
+      ...document.querySelectorAll('.story-stage, .evidence-card, .ceo-image')
     ];
 
     window.addEventListener(

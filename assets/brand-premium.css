@@ -1070,90 +1070,6 @@ a:focus-visible {
   line-height: 1.9;
 }
 
-.network-reel {
-  position: relative;
-  z-index: 3;
-  padding: 96px 0 150px;
-  overflow: hidden;
-  background: var(--ink);
-}
-
-.network-reel::before {
-  position: absolute;
-  top: 0;
-  right: 4vw;
-  left: 4vw;
-  height: 1px;
-  background: var(--line);
-  content: "";
-}
-
-.network-reel-track {
-  display: flex;
-  width: max-content;
-  gap: 14px;
-  animation: network-marquee 38s linear infinite;
-  will-change: transform;
-}
-
-.network-reel:hover .network-reel-track {
-  animation-play-state: paused;
-}
-
-.network-reel figure {
-  position: relative;
-  width: clamp(280px, 31vw, 500px);
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  border-radius: var(--frame-radius);
-  background: #111;
-  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.22);
-}
-
-.network-reel figure::after {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background:
-    radial-gradient(circle at var(--local-x, 50%) var(--local-y, 50%), rgba(226, 197, 142, 0.15), transparent 32%),
-    linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.74));
-  content: "";
-}
-
-.network-reel img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: saturate(0.65) contrast(1.05);
-  transform: translate3d(var(--shift-x, 0px), var(--shift-y, 0px), 0) scale(var(--image-scale, 1.045));
-  transition: filter 500ms ease, transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.network-reel figure:hover {
-  --image-scale: 1.085;
-}
-
-.network-reel figure:hover img {
-  filter: saturate(0.95) contrast(1.04);
-}
-
-.network-reel figcaption {
-  position: absolute;
-  z-index: 2;
-  bottom: 24px;
-  left: 26px;
-  color: rgba(255, 255, 255, 0.72);
-  font-size: 8px;
-  font-weight: 720;
-  letter-spacing: 0.2em;
-}
-
-@keyframes network-marquee {
-  to {
-    transform: translateX(calc(-50% - 7px));
-  }
-}
-
 .history-section {
   padding: clamp(180px, 19vw, 290px) 0;
   border-top: 1px solid var(--line);
@@ -2147,14 +2063,6 @@ a:focus-visible {
 
   .network-count small {
     margin-top: 26px;
-  }
-
-  .network-reel {
-    padding: 80px 0 120px;
-  }
-
-  .network-reel figure {
-    width: 76vw;
   }
 
   .history-heading > span {
