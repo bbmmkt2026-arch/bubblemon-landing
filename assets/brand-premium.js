@@ -302,21 +302,4 @@
       });
     });
   }
-
-  document.querySelectorAll('[data-store-link]').forEach((link) => {
-    link.addEventListener('click', () => {
-      if (typeof window.fbq === 'function') {
-        window.fbq('trackCustom', 'OfficialStoreClick', {
-          button_name: 'store_view',
-          destination: 'naver_smartstore'
-        });
-      }
-      if (typeof window.gtag === 'function') {
-        window.gtag('event', 'official_store_click', {
-          button_name: 'store_view',
-          destination: 'naver_smartstore'
-        });
-      }
-    });
-  });
 })();
