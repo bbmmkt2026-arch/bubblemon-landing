@@ -302,4 +302,21 @@
       });
     });
   }
+
+  document.querySelectorAll('[data-store-buy]').forEach((link) => {
+    link.addEventListener('click', () => {
+      if (typeof window.fbq === 'function') {
+        window.fbq('trackCustom', 'OfficialStoreClick', {
+          product: 'graffiti-iii',
+          destination: 'naver_smartstore'
+        });
+      }
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'official_store_click', {
+          product: 'graffiti-iii',
+          destination: 'naver_smartstore'
+        });
+      }
+    });
+  });
 })();

@@ -1,0 +1,139 @@
+:root {
+  color-scheme: light;
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Noto Sans KR", "Malgun Gothic", sans-serif;
+  background: #fff;
+  color: #111;
+  font-synthesis: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-width: 0;
+  min-height: 100%;
+  margin: 0;
+  background: #fff;
+}
+
+button,
+a {
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.adult-gate {
+  display: flex;
+  width: min(100%, 720px);
+  min-height: 100svh;
+  margin: 0 auto;
+  padding: max(24px, env(safe-area-inset-top)) 24px max(28px, env(safe-area-inset-bottom));
+  align-items: stretch;
+  justify-content: flex-start;
+  flex-direction: column;
+  background: #fff;
+}
+
+.adult-required-mark {
+  display: flex;
+  min-height: 42svh;
+  padding: 4svh 0 3svh;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.adult-19-mark {
+  display: flex;
+  width: clamp(118px, 22vw, 148px);
+  height: clamp(118px, 22vw, 148px);
+  align-items: center;
+  justify-content: center;
+  border: clamp(7px, 1vw, 10px) solid #e11919;
+  border-radius: 50%;
+  background: #fff;
+  color: #111;
+  font-size: clamp(58px, 11vw, 76px);
+  font-weight: 900;
+  letter-spacing: -0.08em;
+  line-height: 1;
+}
+
+.adult-required-mark p {
+  max-width: 570px;
+  margin: clamp(26px, 4vh, 40px) auto 0;
+  color: #111;
+  font-size: clamp(15px, 2.3vw, 18px);
+  font-weight: 650;
+  letter-spacing: -0.035em;
+  line-height: 1.75;
+}
+
+.adult-actions {
+  display: grid;
+  width: min(100%, 440px);
+  margin: clamp(30px, 7vh, 74px) auto 0;
+  gap: 12px;
+}
+
+.adult-actions button,
+.adult-actions a {
+  display: flex;
+  width: 100%;
+  min-height: 58px;
+  padding: 13px 18px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 750;
+  letter-spacing: -0.025em;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.adult-verify {
+  border: 1px solid #111;
+  background: #111;
+  color: #fff;
+}
+
+.adult-exit {
+  border: 1px solid #b9b9b9;
+  background: #fff;
+  color: #111;
+}
+
+.adult-actions button:focus-visible,
+.adult-actions a:focus-visible {
+  outline: 3px solid #1a73e8;
+  outline-offset: 3px;
+}
+
+.adult-actions button:disabled {
+  cursor: wait;
+  opacity: 0.58;
+}
+
+@media (max-width: 480px) {
+  .adult-gate {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .adult-required-mark {
+    min-height: 48svh;
+    justify-content: flex-end;
+  }
+
+  .adult-required-mark p {
+    font-size: 15px;
+  }
+
+  .adult-actions {
+    margin-top: 44px;
+  }
+}
