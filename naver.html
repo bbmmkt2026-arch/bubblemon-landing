@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#050505" />
+    <meta name="theme-color" content="#000000" />
     <meta name="format-detection" content="telephone=no" />
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-W4FLJFV6JB"></script>
@@ -12,516 +12,133 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-W4FLJFV6JB');
+
+      (function () {
+        var dataLayer = window.dataLayer;
+        var originalPush = dataLayer.push;
+        dataLayer.push = function () {
+          for (var index = 0; index < arguments.length; index++) {
+            var item = arguments[index];
+            if (item && typeof item === 'object' && !Array.isArray(item) && item.event) {
+              gtag('event', item.event, item);
+            }
+          }
+          return originalPush.apply(dataLayer, arguments);
+        };
+      })();
     </script>
 
-    <meta name="robots" content="index, follow" />
-    <meta name="googlebot" content="index, follow" />
+    <script async src="https://cdn.onetag.co.kr/0/tcs.js?eid=rhr7m78idsmtrhr7m78ids"></script>
+    <script src="./assets/mobon-tracking.js?v=1" defer></script>
+
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <link rel="canonical" href="https://www.bbmkr.store/" />
 
-    <title>버블몬 Graffiti-III 전자담배 기기 | 버블몬코리아 공식</title>
-    <meta
-      name="description"
-      content="버블몬 Graffiti-III 전자담배 기기의 주요 기능, 컬러, 공식 구매처와 전국 위베이프 매장 정보를 확인하세요."
-    />
+    <title>버블몬 공식 홈페이지 | 버블몬코리아</title>
+    <meta name="description" content="버블몬 공식 홈페이지입니다. 버블몬 Graffiti-III 디바이스, 정품 구매처 및 전국 위베이프 매장 정보를 확인하세요." />
+    <meta name="application-name" content="버블몬" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="버블몬코리아" />
+    <meta property="og:site_name" content="버블몬" />
     <meta property="og:locale" content="ko_KR" />
-    <meta property="og:title" content="버블몬 Graffiti-III | 버블몬코리아 공식" />
-    <meta
-      property="og:description"
-      content="버블몬 Graffiti-III 전자담배 기기 정보와 공식 구매처, 전국 위베이프 매장을 확인하세요."
-    />
+    <meta property="og:title" content="버블몬 공식 홈페이지 | 버블몬코리아" />
+    <meta property="og:description" content="버블몬 Graffiti-III 디바이스, 정품 구매처 및 전국 위베이프 매장 정보를 확인하세요." />
     <meta property="og:url" content="https://www.bbmkr.store/" />
     <meta property="og:image" content="https://www.bbmkr.store/media/og-home-v2.png" />
     <meta property="og:image:secure_url" content="https://www.bbmkr.store/media/og-home-v2.png" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="버블몬코리아 공식 홈페이지" />
+    <meta property="og:image:alt" content="버블몬 공식 홈페이지 - GRAFFITI-III 그래피티3" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="버블몬 Graffiti-III | 버블몬코리아 공식" />
-    <meta
-      name="twitter:description"
-      content="버블몬 Graffiti-III 전자담배 기기 정보와 공식 구매처, 전국 위베이프 매장을 확인하세요."
-    />
+    <meta name="twitter:title" content="버블몬 공식 홈페이지 | 버블몬코리아" />
+    <meta name="twitter:description" content="버블몬 Graffiti-III 디바이스, 정품 구매처 및 전국 위베이프 매장 정보를 확인하세요." />
     <meta name="twitter:image" content="https://www.bbmkr.store/media/og-home-v2.png" />
-    <meta name="twitter:image:alt" content="버블몬코리아 공식 홈페이지" />
 
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "버블몬코리아(주)",
-        "alternateName": "BUBBLEMON KOREA",
-        "url": "https://www.bbmkr.store/",
-        "logo": "https://www.bbmkr.store/products/bubblemon-logo.webp",
-        "email": "bubblemonkorea@naver.com",
-        "telephone": "+82-10-7351-3809",
-        "foundingDate": "2020",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "원석로 54 (석남동)",
-          "addressLocality": "서구",
-          "addressRegion": "인천광역시",
-          "addressCountry": "KR"
-        }
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://www.bbmkr.store/#organization",
+            "name": "버블몬코리아(주)",
+            "alternateName": ["버블몬", "BUBBLEMON", "위베이프", "WEVAPE"],
+            "url": "https://www.bbmkr.store/",
+            "logo": "https://www.bbmkr.store/products/bubblemon-logo.webp",
+            "brand": { "@id": "https://www.bbmkr.store/#brand" },
+            "sameAs": ["https://smartstore.naver.com/bubblemonkorea"]
+          },
+          {
+            "@type": "Brand",
+            "@id": "https://www.bbmkr.store/#brand",
+            "name": "버블몬",
+            "alternateName": ["BUBBLEMON", "버블몬코리아", "Bubblemon Korea"],
+            "url": "https://www.bbmkr.store/",
+            "logo": "https://www.bbmkr.store/products/bubblemon-logo.webp"
+          },
+          {
+            "@type": "Product",
+            "@id": "https://www.bbmkr.store/#graffiti3",
+            "name": "버블몬 Graffiti-III (그래피티3)",
+            "alternateName": ["버블몬 GRAFFITI-III", "버블몬 그래피티3", "BUBBLEMON Graffiti-III"],
+            "description": "5–25W 출력 조절, 1500mAh 배터리와 4가지 컬러를 갖춘 버블몬 디바이스",
+            "image": "https://www.bbmkr.store/products/graffiti3-hero-pc-v4.webp",
+            "brand": { "@id": "https://www.bbmkr.store/#brand" },
+            "manufacturer": { "@id": "https://www.bbmkr.store/#organization" },
+            "category": "전자담배 디바이스",
+            "audience": { "@type": "PeopleAudience", "suggestedMinAge": 19 }
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://www.bbmkr.store/#webpage",
+            "url": "https://www.bbmkr.store/",
+            "name": "버블몬 공식 홈페이지 | 버블몬코리아",
+            "description": "버블몬 브랜드와 Graffiti-III 디바이스, 정품 구매처 및 전국 위베이프 매장 안내",
+            "about": { "@id": "https://www.bbmkr.store/#brand" },
+            "mainEntity": { "@id": "https://www.bbmkr.store/#graffiti3" },
+            "inLanguage": "ko-KR"
+          }
+        ]
       }
     </script>
 
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="48x48" href="/icons/favicon-48.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon-180.png" />
-    <link rel="preload" href="./products/bubblemon-logo.webp" as="image" type="image/webp" />
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-    <link rel="preconnect" href="https://i.ytimg.com" />
-    <link
-      rel="stylesheet"
-      as="style"
-      crossorigin
-      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
-    />
-    <link rel="stylesheet" href="./assets/brand-premium.css?v=25" />
-    <script defer src="./assets/brand-premium.js?v=9"></script>
+    <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Meta Pixel Code -->
-    <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;
-      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];
-      t=b.createElement(e);t.async=!0;t.src=v;
-      s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
-      (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '1605359824426468');
-      fbq('track', 'PageView');
-    </script>
-    <!-- End Meta Pixel Code -->
+    <link rel="preconnect" href="https://dapi.kakao.com" crossorigin />
+    <link rel="dns-prefetch" href="https://dapi.kakao.com" />
+    <link rel="preconnect" href="https://t1.daumcdn.net" />
+
+    <script type="module" crossorigin src="./assets/app.js?v=6"></script>
+    <script src="./assets/kakao-map.js?v=3" defer></script>
+    <script src="./assets/brand-section.js?v=10" defer></script>
+    <script src="./assets/tech-enhancement.js?v=5" defer></script>
+    <script src="./assets/section-details.js?v=2" defer></script>
+    <script src="./assets/color-transition.js?v=1" defer></script>
+    <script src="./assets/store-selection.js?v=2" defer></script>
+    <script src="./assets/product-store-link.js?v=2" defer></script>
+    <link rel="stylesheet" crossorigin href="./assets/style.css?v=24" />
   </head>
   <body>
+    <div id="root">
+      <main style="min-height:100vh;padding:96px 24px;background:#000;color:#f5f5f7;font-family:system-ui,'Apple SD Gothic Neo',sans-serif;text-align:center;">
+        <h1 style="margin:0;font-size:clamp(36px,8vw,72px);">버블몬 공식 홈페이지</h1>
+        <p style="max-width:680px;margin:24px auto 0;line-height:1.8;">
+          버블몬 Graffiti-III 디바이스와 전국 위베이프 매장 정보를 확인하세요.
+        </p>
+        <p style="margin:16px auto 0;">본 제품은 19세 미만 청소년에게 판매할 수 없습니다.</p>
+      </main>
+    </div>
+
     <noscript>
-      <img
-        height="1"
-        width="1"
-        style="display:none"
-        src="https://www.facebook.com/tr?id=1605359824426468&amp;ev=PageView&amp;noscript=1"
-        alt=""
-      />
+      <p style="max-width:640px;margin:48px auto;padding:0 24px;font-family:system-ui,'Apple SD Gothic Neo',sans-serif;color:#111;line-height:1.7;text-align:center;">
+        이 페이지를 보려면 브라우저의 자바스크립트를 켜주세요.
+      </p>
     </noscript>
-
-    <div class="scroll-progress" aria-hidden="true"><i></i></div>
-
-    <header class="site-header" data-header>
-      <a class="site-brand" href="#top" aria-label="버블몬코리아 홈페이지 상단으로">
-        <img src="./products/bubblemon-logo.webp" width="6430" height="705" alt="BUBBLEMON" />
-      </a>
-      <nav class="site-nav" aria-label="주요 메뉴">
-        <a href="#product" data-nav-link="product">제품</a>
-        <a href="#stores" data-nav-link="stores">매장</a>
-        <a href="#story" data-nav-link="story">스토리</a>
-        <a href="#system" data-nav-link="system">운영</a>
-        <a href="#network" data-nav-link="network">네트워크</a>
-      </nav>
-    </header>
-
-    <main id="top">
-      <section class="hero product-hero" data-nav-section="product" aria-labelledby="hero-title">
-        <div class="hero-film" aria-hidden="true" data-hero-film>
-          <img
-            class="product-hero-art"
-            src="./products/graffiti3-hero-cutout-v2.webp"
-            width="1100"
-            height="3000"
-            alt=""
-          />
-        </div>
-        <div class="hero-shade" aria-hidden="true"></div>
-        <div class="hero-coordinates" aria-hidden="true">
-          <span>ELECTRONIC CIGARETTE DEVICE · ADULTS ONLY</span>
-        </div>
-        <div class="hero-content">
-          <p class="eyebrow">BUBBLEMON DEVICE</p>
-          <h1 id="hero-title">새로운 기준,<br /><em>Graffiti-III.</em></h1>
-          <p class="hero-lead">
-            5–25W 출력과 1500mAh 배터리, USB-C 2A 충전을 담은<br />
-            버블몬 전자담배 기기입니다.
-          </p>
-          <div class="hero-actions">
-            <a
-              class="primary-action"
-              href="https://smartstore.naver.com/bubblemonkorea/products/13658197568"
-              target="_blank"
-              rel="nofollow sponsored noreferrer"
-              data-store-buy
-            >공식 스토어에서 구매하기</a>
-            <a class="secondary-action" href="#product">제품 정보 보기</a>
-          </div>
-          <p class="product-youth-notice">본 제품은 19세 미만 청소년에게 판매할 수 없습니다.</p>
-        </div>
-      </section>
-
-      <section class="product-section" id="product" data-nav-section="product" aria-labelledby="product-title">
-        <div class="shell product-heading" data-reveal>
-          <div>
-            <p class="eyebrow">GRAFFITI-III</p>
-            <h2 id="product-title">매일 사용하는 기기에<br />필요한 기준을 담았습니다.</h2>
-          </div>
-          <p>
-            출력 조절, 잔량 확인, 잠금과 에어플로 조절을 한 기기에 구성했습니다.
-            메탈 바디와 네 가지 컬러로 사용 편의와 개성을 함께 제공합니다.
-          </p>
-        </div>
-
-        <div class="shell product-stage" data-reveal>
-          <figure class="product-main-visual">
-            <img
-              src="./products/graffiti3-trio-v1.webp"
-              width="1500"
-              height="2000"
-              alt="버블몬 Graffiti-III 전자담배 기기 세 가지 컬러"
-              loading="lazy"
-            />
-          </figure>
-          <div class="product-specs" aria-label="Graffiti-III 주요 사양">
-            <article><strong>5–25W</strong><span>조절 가능한 출력</span></article>
-            <article><strong>1500mAh</strong><span>내장 배터리</span></article>
-            <article><strong>USB-C 2A</strong><span>충전 지원</span></article>
-            <article><strong>4 COLORS</strong><span>네 가지 컬러</span></article>
-          </div>
-        </div>
-
-        <div class="shell product-detail-grid">
-          <figure data-reveal>
-            <img src="./products/graffiti3-display-cutout.webp" width="1200" height="900" alt="출력과 배터리 잔량을 표시하는 Graffiti-III 디스플레이" loading="lazy" />
-            <figcaption><span>DISPLAY</span><strong>필요한 정보를 한눈에</strong></figcaption>
-          </figure>
-          <figure data-reveal>
-            <img src="./products/graffiti3-spec-pod-detach-v3.webp" width="1200" height="900" alt="Graffiti-III 분리형 구조" loading="lazy" />
-            <figcaption><span>DESIGN</span><strong>간편한 분리와 관리</strong></figcaption>
-          </figure>
-        </div>
-
-        <div class="shell product-purchase" data-reveal>
-          <div>
-            <p class="eyebrow">OFFICIAL STORE</p>
-            <h3>버블몬 Graffiti-III 정품 구매</h3>
-            <p>제품 상세 정보와 판매 조건은 버블몬코리아 공식 스마트스토어에서 확인할 수 있습니다.</p>
-          </div>
-          <a
-            href="https://smartstore.naver.com/bubblemonkorea/products/13658197568"
-            target="_blank"
-            rel="nofollow sponsored noreferrer"
-            data-store-buy
-          >제품 구매하기 <span aria-hidden="true">↗</span></a>
-          <p class="product-youth-notice">본 제품은 19세 미만 청소년에게 판매할 수 없습니다.</p>
-        </div>
-      </section>
-
-      <section class="store-gallery-section" id="stores" data-nav-section="stores" aria-labelledby="stores-title">
-        <div class="shell store-gallery-heading" data-reveal>
-          <p class="eyebrow">WEVAPE NETWORK</p>
-          <h2 id="stores-title">전국의 위베이프 매장에서<br />버블몬을 만나보세요.</h2>
-          <p>가까운 매장에서 제품 상담과 정품 구매 안내를 받을 수 있습니다.</p>
-        </div>
-        <div class="shell store-photo-grid">
-          <figure data-reveal>
-            <img src="./media/brand-story/store-seongsu-yeonmujang.jpg" width="680" height="544" alt="위베이프 성수연무장길점 매장 외관" loading="lazy" />
-            <figcaption>성수연무장길점</figcaption>
-          </figure>
-          <figure data-reveal>
-            <img src="./media/brand-story/store-samseong.jpg" width="768" height="1024" alt="위베이프 삼성점 매장 외관" loading="lazy" />
-            <figcaption>삼성점</figcaption>
-          </figure>
-          <figure data-reveal>
-            <img src="./media/brand-story/store-konkuk-square.jpg" width="1600" height="1600" alt="위베이프 건대점 매장 외관" loading="lazy" />
-            <figcaption>건대점</figcaption>
-          </figure>
-          <figure data-reveal>
-            <img src="./media/brand-story/store-euljiro.jpg" width="768" height="1024" alt="위베이프 을지로점 매장 외관" loading="lazy" />
-            <figcaption>을지로점</figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <section class="opening-statement" aria-label="브랜드 선언">
-        <div class="statement-line" aria-hidden="true">
-          <span>BUILD THE STANDARD · BUILD THE STANDARD · BUILD THE STANDARD ·</span>
-        </div>
-        <div class="shell statement-copy" data-reveal>
-          <div class="statement-side">
-            <p class="brand-eyebrow" aria-label="BUBBLEMON">
-              <img src="./products/bubblemon-logo.webp" width="6430" height="705" alt="" />
-            </p>
-            <figure class="statement-visual">
-              <img src="./media/brand-story/ai-new-standard-v3.webp" width="1600" height="900" alt="새로운 기준을 상징하는 브랜드 비주얼" loading="lazy" />
-              <figcaption><span>NEW STANDARD</span><i>DESIGN THE NEXT</i></figcaption>
-            </figure>
-          </div>
-          <div class="statement-message">
-            <h2>
-              우리는 익숙한 답보다<br />
-              <em>새로운 기준</em>을 선택합니다.
-            </h2>
-            <p>
-              고객의 일상에서 질문을 찾고, 기술과 사람으로 답을 완성합니다.
-              변화가 필요한 순간마다 가장 가까운 현장에서 다음을 준비해 왔습니다.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="story-section" id="story" data-nav-section="story" aria-labelledby="story-title">
-        <div class="shell story-heading" data-reveal>
-          <div>
-            <h2 id="story-title">한 번의 인상이 아닌,<br />오래 남는 브랜드를 위해.</h2>
-          </div>
-          <p>
-            버블몬코리아는 고객, 현장, 파트너를 하나의 흐름으로 연결합니다.
-            브랜드가 보이는 순간보다 그 이전의 선택과 이후의 책임을 더 중요하게 생각합니다.
-          </p>
-        </div>
-
-        <div class="shell story-scroll">
-          <div class="story-stage" aria-hidden="true">
-            <figure class="story-visual is-active" data-story-image="0">
-              <img src="./media/brand-story/ai-everyday-change-v3.webp" width="1600" height="900" alt="" />
-              <figcaption>THE FIRST IMPRESSION</figcaption>
-            </figure>
-            <figure class="story-visual" data-story-image="1">
-              <img src="./media/brand-story/story-field.jpg" width="2048" height="1365" alt="" loading="lazy" />
-              <figcaption>THE UNSEEN PROCESS</figcaption>
-            </figure>
-            <figure class="story-visual" data-story-image="2">
-              <img src="./media/brand-story/ai-shared-standard-v3.webp" width="1600" height="900" alt="" loading="lazy" />
-              <figcaption>THE CONNECTED STANDARD</figcaption>
-            </figure>
-            <span class="story-frame-index">01 — 03</span>
-          </div>
-
-          <div class="story-chapters">
-            <article class="story-chapter is-active" data-story-chapter="0" data-reveal>
-              <span>01</span>
-              <h3>모든 변화는<br />고객의 일상에서 시작됩니다.</h3>
-              <p>
-                가장 가까운 곳에서 듣고 관찰하며, 일상의 작은 불편과 새로운 가능성을
-                브랜드가 나아갈 방향으로 바꿉니다.
-              </p>
-            </article>
-            <article class="story-chapter" data-story-chapter="1" data-reveal>
-              <span>02</span>
-              <h3>보이지 않는 과정까지<br />직접 확인합니다.</h3>
-              <p>
-                기획의 의도가 실제 현장에서 흔들리지 않도록 전문 인력이
-                생산 거점과 운영 과정을 가까이에서 관리합니다.
-              </p>
-            </article>
-            <article class="story-chapter" data-story-chapter="2" data-reveal>
-              <span>03</span>
-              <h3>좋은 기준은<br />함께할 때 더 멀리 갑니다.</h3>
-              <p>
-                현지 운영 기반과 국내 네트워크를 하나의 흐름으로 잇고,
-                고객과 파트너의 목소리를 다음 변화로 연결합니다.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="system-section" id="system" data-nav-section="system" aria-labelledby="system-title">
-        <div class="shell system-intro" data-reveal>
-          <h2 id="system-title">현장을 알아야<br />기준을 지킬 수 있습니다.</h2>
-          <p>
-            자체 기술을 보유한 전문 인력을 현지에 배치하고,
-            기획부터 운영과 유통으로 이어지는 전 과정을 하나의 원칙 아래 관리합니다.
-          </p>
-        </div>
-
-        <div class="shell evidence-grid">
-          <figure class="evidence-card evidence-main" data-reveal data-parallax>
-            <img src="./media/brand-story/quality-packaging.jpg" width="1536" height="2048" alt="생산 현장에서 패키징을 점검하는 전문 인력" loading="lazy" />
-            <figcaption>
-              <span>01 / FINAL CHECK</span>
-              <strong>마지막 단계까지<br />직접 확인합니다.</strong>
-            </figcaption>
-          </figure>
-          <figure class="evidence-card evidence-tall" data-reveal data-parallax>
-            <img src="./media/brand-story/production-floor.jpg" width="768" height="1024" alt="현지 생산 시설 내부" loading="lazy" />
-            <figcaption>
-              <span>02 / PROCESS</span>
-              <strong>현장의 흐름을<br />하나의 기준으로.</strong>
-            </figcaption>
-          </figure>
-          <figure class="evidence-card" data-reveal data-parallax>
-            <img src="./media/brand-story/precision-process.jpg" width="768" height="1024" alt="생산 설비를 점검하는 전문 인력" loading="lazy" />
-            <figcaption>
-              <span>03 / PRECISION</span>
-              <strong>과정을 가까이<br />세심하게 살핍니다.</strong>
-            </figcaption>
-          </figure>
-          <figure class="evidence-card evidence-wide" data-reveal data-parallax>
-            <img src="./media/brand-story/operations-environment.jpg" width="697" height="612" alt="생산 설비와 운영 환경을 점검하는 전문 인력" loading="lazy" />
-            <figcaption>
-              <span>04 / CONTROL</span>
-              <strong>운영 환경까지<br />직접 확인합니다.</strong>
-            </figcaption>
-          </figure>
-        </div>
-
-        <div class="system-principles">
-          <div class="shell principles-grid">
-            <article data-reveal>
-              <span>PLAN</span>
-              <strong>고객에서 시작한 기획</strong>
-              <p>시장보다 먼저 사람을 이해하고, 변화의 방향을 구체적인 계획으로 만듭니다.</p>
-            </article>
-            <article data-reveal>
-              <span>ON-SITE</span>
-              <strong>현장에서 지키는 기준</strong>
-              <p>전문 인력이 실제 운영 과정을 살피며 의도와 결과 사이의 간격을 줄입니다.</p>
-            </article>
-            <article data-reveal>
-              <span>CONNECT</span>
-              <strong>전국으로 이어지는 경험</strong>
-              <p>현지 운영부터 국내 접점까지 하나의 흐름으로 연결해 일관된 경험을 만듭니다.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="network-section" id="network" data-nav-section="network" aria-labelledby="network-title">
-        <div class="network-backdrop" data-parallax aria-hidden="true">
-          <img src="./media/brand-story/brand-film-standard.jpg" width="1280" height="720" alt="" loading="lazy" />
-        </div>
-        <div class="network-shade" aria-hidden="true"></div>
-        <div class="shell network-content">
-          <div class="network-count" data-reveal>
-            <strong data-count="484">484</strong>
-            <small>전국 네트워크</small>
-          </div>
-          <div class="network-copy" data-reveal>
-            <h2 id="network-title">가까운 현장에서<br />브랜드의 내일을 듣습니다.</h2>
-            <p>
-              전국 484개 위베이프 네트워크는 고객과 브랜드가 만나는 가장 가까운 접점입니다.
-              각 지역의 경험과 목소리가 다시 운영의 기준이 되고, 다음 변화를 만드는 힘이 됩니다.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="history-section" id="history" data-nav-section="history" aria-labelledby="history-title">
-        <div class="shell history-layout">
-          <div class="history-heading" data-reveal>
-            <h2 id="history-title">변화의 순간마다<br />다음을 선택했습니다.</h2>
-            <p>
-              글로벌 기술 기반에서 시작해 국내 시장의 새로운 운영 모델을 구축하기까지.
-              버블몬코리아의 시간은 도전과 연결의 기록입니다.
-            </p>
-            <span>1991 — 2026</span>
-          </div>
-
-          <div class="history-timeline" data-timeline>
-            <i class="timeline-progress" aria-hidden="true"></i>
-            <article class="history-item" data-reveal>
-              <time datetime="1991">1991</time>
-              <div><span>GLOBAL ORIGIN</span><h3>중국 심천 BOTON 설립</h3><p>글로벌 기술과 연구 기반의 출발점이 마련되었습니다.</p></div>
-            </article>
-            <article class="history-item" data-reveal>
-              <time datetime="2005">2005</time>
-              <div><span>GLOBAL GROWTH</span><h3>홍콩 시장 상장</h3><p>향료와 기술 분야의 글로벌 사업 기반을 확대했습니다.</p></div>
-            </article>
-            <article class="history-item" data-reveal>
-              <time datetime="2020">2020</time>
-              <div><span>LOCAL BEGINNING</span><h3>한국 사업 본격화</h3><p>국내 법인과 사업 조직을 갖추며 새로운 여정을 시작했습니다.</p></div>
-            </article>
-            <article class="history-item" data-reveal>
-              <time datetime="2021">2021</time>
-              <div><span>CAPABILITY</span><h3>연구와 사업 영역 확장</h3><p>전문 사업 허가와 연구 기반을 바탕으로 운영 역량을 넓혔습니다.</p></div>
-            </article>
-            <article class="history-item history-highlight" data-reveal>
-              <time datetime="2022">2022</time>
-              <div><span class="history-brand-mark" aria-label="BUBBLEMON"><img src="./products/bubblemon-logo.webp" width="6430" height="705" alt="" /></span><h3>버블몬코리아로 새롭게 출발</h3><p>회사명을 변경하고 현지 생산과 국내 유통을 잇는 체계를 구축했습니다.</p></div>
-            </article>
-            <article class="history-item" data-reveal>
-              <time datetime="2023">2023</time>
-              <div><span>INTEGRATION</span><h3>글로벌 파트너십과 조직 확대</h3><p>글로벌 브랜드와의 협력 구조를 강화하고 국내 영업 조직을 확장했습니다.</p></div>
-            </article>
-            <article class="history-item" data-reveal>
-              <time datetime="2024">2024</time>
-              <div><span>PORTFOLIO</span><h3>글로벌 브랜드 유통 본격화</h3><p>브랜드 포트폴리오와 전국 유통 기반을 한층 더 넓혔습니다.</p></div>
-            </article>
-            <article class="history-item" data-reveal>
-              <time datetime="2025">2025</time>
-              <div><span>MOMENTUM</span><h3>대표 브랜드와 네트워크의 성장</h3><p>시장 성과와 브랜드 수상을 통해 운영 경쟁력을 입증했습니다.</p></div>
-            </article>
-            <article class="history-item" data-reveal>
-              <time datetime="2026">2026</time>
-              <div><span>NEXT STANDARD</span><h3>새로운 프로젝트의 시작</h3><p>지금까지 쌓아온 기준 위에서 다음 세대의 브랜드 경험을 준비합니다.</p></div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="ceo-section" id="ceo" data-nav-section="ceo" aria-labelledby="ceo-title">
-        <div class="ceo-image" data-parallax>
-          <img src="./media/brand-story/production-base.jpg" width="1536" height="1007" alt="버블몬 본사 건물 전경" loading="lazy" />
-          <span aria-hidden="true">HEADQUARTERS · SHENZHEN</span>
-        </div>
-        <div class="ceo-copy">
-          <div data-reveal>
-            <h2 id="ceo-title">함께하는 미래,<br />대표가 드리는 말씀.</h2>
-            <p class="ceo-opening">안녕하십니까. 버블몬코리아 대표 한상헌입니다.</p>
-            <div class="ceo-message">
-              <p>
-                버블몬코리아는 단순한 유통을 넘어, 완성도 높은 브랜드와
-                지속 가능한 사업 모델을 만드는 일에 집중해 왔습니다.
-              </p>
-              <p>
-                지금까지의 성장은 철저한 품질 관리, 합리적인 유통 구조,
-                그리고 파트너와의 상생을 최우선으로 한 운영 철학에서 비롯되었습니다.
-                앞으로도 고객에게는 신뢰를, 파트너에게는 지속 가능한 성장의 기반을,
-                시장에는 건강한 기준을 제시하는 기업으로 나아가겠습니다.
-              </p>
-              <p>변함없는 관심과 성원에 깊이 감사드립니다.</p>
-            </div>
-            <div class="ceo-sign">
-              <span>버블몬코리아 대표</span>
-              <strong>한상헌</strong>
-              <img src="./media/brand-story/ceo-signature.png" width="300" height="140" alt="한상헌 대표 서명" loading="lazy" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="closing-section" id="contact" aria-labelledby="closing-title">
-        <div class="closing-orbit" aria-hidden="true"></div>
-        <div class="shell closing-content" data-reveal>
-          <h2 id="closing-title">기준을 만드는 일은<br /><em>계속됩니다.</em></h2>
-          <p>브랜드 및 제휴 관련 문의는 아래 채널을 통해 연락해 주세요.</p>
-          <div class="closing-actions">
-            <a href="mailto:bubblemonkorea@naver.com" data-magnetic>
-              <span>브랜드·제휴 문의</span><i aria-hidden="true">↗</i>
-            </a>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="footer-brand">
-        <img src="./products/bubblemon-logo.webp" width="6430" height="705" alt="BUBBLEMON" />
-      </div>
-      <div class="footer-info">
-        <p>버블몬코리아(주) · 대표 한상헌</p>
-        <p>사업자등록번호 877-86-01816 · 통신판매업 제2023-인천서구-1356</p>
-        <p>인천광역시 서구 원석로 54 (석남동)</p>
-        <p><a href="mailto:bubblemonkorea@naver.com">bubblemonkorea@naver.com</a> · <a href="tel:+821073513809">010-7351-3809</a></p>
-      </div>
-      <div class="footer-meta">
-        <p>만 19세 미만 청소년에게는 판매하지 않습니다.</p>
-        <p>© 2026. ALL RIGHTS RESERVED.</p>
-      </div>
-    </footer>
   </body>
 </html>
