@@ -64,3 +64,17 @@ test('청소년보호법의 연도 기준으로 성인 세션을 발급한다', 
   assert.equal(underageResponse.body.code, 'UNDERAGE');
   assert.equal(underageResponse.headers['set-cookie'], undefined);
 });
+
+test('별도 세션 키가 없으면 PortOne API Secret에서 서명 키를 파생한다', async () => {
+  process.env.PORTONE_API_SECRET = 'test-portone-api-secret';
+  delete process.env.AGE_SESSION_SECRET;
+
+  const currentYear = Number(
+    new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Seoul', year: 'numeric' }).format(new Date())
+  );
+  const response = await verifyBirthYear(currentYear - 19);
+
+  assert.equal(response.statusCode, 200);
+  assert.equal(response.body.verified, true);
+  assert.match(response.headers['set-cookie'], /^bbm_adult=/);
+});

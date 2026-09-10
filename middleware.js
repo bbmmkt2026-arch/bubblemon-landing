@@ -53,9 +53,16 @@ function readCookie(request, name) {
 }
 
 async function hasAdultSession(request) {
-  const secret = process.env.AGE_SESSION_SECRET;
+  let secret = process.env.AGE_SESSION_SECRET;
+  if ((!secret || secret.length < 32) && process.env.PORTONE_API_SECRET) {
+    const derived = await crypto.subtle.digest(
+      'SHA-256',
+      new TextEncoder().encode(`bbmkr-age-session-v1\0${process.env.PORTONE_API_SECRET}`)
+    );
+    secret = new Uint8Array(derived);
+  }
   const token = readCookie(request, AGE_COOKIE);
-  if (!secret || secret.length < 32 || !token) return false;
+  if (!secret || !token) return false;
 
   const [payload, signature, extra] = token.split('.');
   if (!payload || !signature || extra) return false;
@@ -63,7 +70,7 @@ async function hasAdultSession(request) {
   try {
     const key = await crypto.subtle.importKey(
       'raw',
-      new TextEncoder().encode(secret),
+      typeof secret === 'string' ? new TextEncoder().encode(secret) : secret,
       { name: 'HMAC', hash: 'SHA-256' },
       false,
       ['verify']

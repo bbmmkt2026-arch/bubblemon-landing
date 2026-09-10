@@ -14,7 +14,7 @@ PASS 앱은 웹사이트가 직접 API 키 하나만 받아 호출하는 구조�
 6. PortOne 관리자 콘솔에서 확인한 `Store ID`
 7. 본인인증 채널의 `Channel Key`
 8. PortOne V2 `API Secret`
-9. 세션 서명용 32자 이상의 무작위 `AGE_SESSION_SECRET`
+9. 선택 사항: 세션 서명용 32자 이상의 무작위 `AGE_SESSION_SECRET`
 
 `wevape.co.kr`의 공개 프런트엔드에서 Store ID와 Channel Key는 확인할 수 있습니다. 두 값은 브라우저용 식별자이므로 재사용할 수 있지만, 서버 검증에 필요한 API Secret은 공개되어 있지 않습니다. 실제 연결에는 같은 PortOne 계정의 운영용 API Secret이 반드시 필요합니다.
 
@@ -29,7 +29,7 @@ PORTONE_API_SECRET
 AGE_SESSION_SECRET
 ```
 
-`PORTONE_API_SECRET`과 `AGE_SESSION_SECRET`은 브라우저 코드나 저장소에 넣지 않고 Vercel 환경변수로만 관리합니다.
+`PORTONE_API_SECRET`과 `AGE_SESSION_SECRET`은 브라우저 코드나 저장소에 넣지 않고 Vercel 환경변수로만 관리합니다. `AGE_SESSION_SECRET`을 따로 등록하지 않으면 서버가 `PORTONE_API_SECRET`에서 세션 서명 전용 키를 파생합니다.
 
 기존 운영 채널을 그대로 쓸 경우에는 PortOne 계정 관리자에게 다음 두 가지를 확인하면 됩니다.
 

@@ -5,10 +5,18 @@ const SESSION_SECONDS = 60 * 60 * 12;
 
 function getSessionSecret() {
   const secret = process.env.AGE_SESSION_SECRET;
-  if (!secret || secret.length < 32) {
-    throw new Error('AGE_SESSION_SECRET must be at least 32 characters.');
+  if (secret && secret.length >= 32) return secret;
+
+  const apiSecret = process.env.PORTONE_API_SECRET;
+  if (!apiSecret) {
+    throw new Error('PORTONE_API_SECRET or AGE_SESSION_SECRET is required.');
   }
-  return secret;
+
+  return crypto
+    .createHash('sha256')
+    .update('bbmkr-age-session-v1\0')
+    .update(apiSecret)
+    .digest();
 }
 
 function createAdultToken() {

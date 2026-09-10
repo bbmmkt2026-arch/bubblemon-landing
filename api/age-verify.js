@@ -29,7 +29,7 @@ module.exports = async function ageVerify(request, response) {
   }
 
   const apiSecret = process.env.PORTONE_API_SECRET;
-  if (!apiSecret || !process.env.AGE_SESSION_SECRET) {
+  if (!apiSecret) {
     return response.status(503).json({ message: 'Adult verification is not configured.' });
   }
 
