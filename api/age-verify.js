@@ -111,6 +111,7 @@ module.exports = async function ageVerify(request, response) {
         code: 'PORTONE_LOOKUP_FAILED',
         upstreamStatus: verificationResponse.status,
         upstreamType: portoneError?.type || portoneError?.code || 'UNKNOWN',
+        fallbackStatus: existingSiteResult.status,
         message: '성인인증 결과를 확인하지 못했습니다.'
       });
     }
