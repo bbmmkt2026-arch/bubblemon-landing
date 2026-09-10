@@ -45,7 +45,17 @@ module.exports = async function ageVerify(request, response) {
     );
 
     if (!verificationResponse.ok) {
-      return response.status(502).json({ message: '성인인증 결과를 확인하지 못했습니다.' });
+      const portoneError = await verificationResponse.json().catch(() => ({}));
+      console.error('PortOne identity verification lookup failed.', {
+        status: verificationResponse.status,
+        type: portoneError?.type || portoneError?.code || 'UNKNOWN'
+      });
+      return response.status(502).json({
+        code: 'PORTONE_LOOKUP_FAILED',
+        upstreamStatus: verificationResponse.status,
+        upstreamType: portoneError?.type || portoneError?.code || 'UNKNOWN',
+        message: '성인인증 결과를 확인하지 못했습니다.'
+      });
     }
 
     const verification = await verificationResponse.json();
