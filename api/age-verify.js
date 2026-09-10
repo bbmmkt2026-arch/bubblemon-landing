@@ -24,7 +24,7 @@ module.exports = async function ageVerify(request, response) {
   }
 
   const identityVerificationId = request.body?.identityVerificationId;
-  if (!/^[A-Za-z0-9_-]{8,120}$/.test(String(identityVerificationId || ''))) {
+  if (!/^bbmkr[A-Za-z0-9]{32}$/.test(String(identityVerificationId || ''))) {
     return response.status(400).json({ message: 'Invalid identity verification ID.' });
   }
 

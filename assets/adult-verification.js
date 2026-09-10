@@ -11,6 +11,13 @@
     window.alert(message);
   };
 
+  const createIdentityVerificationId = () => {
+    const bytes = new Uint8Array(16);
+    window.crypto.getRandomValues(bytes);
+    const randomPart = Array.from(bytes, (byte) => byte.toString(16).padStart(2, '0')).join('');
+    return `bbmkr${randomPart}`;
+  };
+
   const finishVerification = async (identityVerificationId) => {
     verifyButton.disabled = true;
     verifyButton.textContent = '인증 결과 확인 중';
@@ -58,7 +65,8 @@
         throw new Error('성인인증 서비스 연결이 준비되지 않았습니다.');
       }
 
-      const identityVerificationId = `bbmkr-${crypto.randomUUID()}`;
+      const identityVerificationId = createIdentityVerificationId();
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
       const response = await window.PortOne.requestIdentityVerification({
         storeId: config.storeId,
         channelKey: config.channelKey,
@@ -69,9 +77,8 @@
         },
         redirectUrl: `${window.location.origin}/`,
         bypass: {
-          inicisUnified: {
-            directAgency: 'PASS',
-            flgFixedUser: 'N'
+          kcp_v2: {
+            media_type: isMobile ? 'MC02' : 'MC01'
           }
         }
       });

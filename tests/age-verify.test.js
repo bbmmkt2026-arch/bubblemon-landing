@@ -37,7 +37,7 @@ async function verifyBirthYear(birthYear) {
   await ageVerify(
     {
       method: 'POST',
-      body: { identityVerificationId: 'bbmkr-00000000-0000-0000-0000-000000000000' }
+      body: { identityVerificationId: 'bbmkr00000000000000000000000000000000' }
     },
     response
   );
