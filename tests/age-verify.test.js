@@ -78,3 +78,46 @@ test('별도 세션 키가 없으면 PortOne API Secret에서 서명 키를 파�
   assert.equal(response.body.verified, true);
   assert.match(response.headers['set-cookie'], /^bbm_adult=/);
 });
+
+test('직접 조회가 401이면 기존 위베이프 성인인증 서버로 검증한다', async () => {
+  process.env.PORTONE_API_SECRET = 'invalid-direct-api-secret';
+  delete process.env.AGE_SESSION_SECRET;
+
+  global.fetch = async (url) => {
+    if (String(url).startsWith('https://api.portone.io/')) {
+      return {
+        ok: false,
+        status: 401,
+        async json() { return { type: 'UNAUTHORIZED' }; }
+      };
+    }
+    if (String(url).includes('bbmkr-verifier=1')) {
+      return {
+        ok: true,
+        status: 200,
+        async text() { return 'var avmModal = {"nonce":"public-rest-nonce"};'; }
+      };
+    }
+    if (String(url).endsWith('/wp-json/avm/v1/verify')) {
+      return {
+        ok: true,
+        status: 200,
+        async json() { return { ok: true }; }
+      };
+    }
+    throw new Error(`Unexpected URL: ${url}`);
+  };
+
+  const response = createResponse();
+  await ageVerify(
+    {
+      method: 'POST',
+      body: { identityVerificationId: 'bbmkr00000000000000000000000000000000' }
+    },
+    response
+  );
+
+  assert.equal(response.statusCode, 200);
+  assert.equal(response.body.verified, true);
+  assert.match(response.headers['set-cookie'], /^bbm_adult=/);
+});
