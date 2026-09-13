@@ -20,6 +20,34 @@
     });
   }
 
+  function updateBusinessAddress() {
+    var footer = document.querySelector("footer");
+    if (!footer) return false;
+
+    var businessRow = Array.from(footer.querySelectorAll("p")).find(function (row) {
+      return row.textContent.indexOf("사업자 등록번호") !== -1;
+    });
+    if (!businessRow) return false;
+    if (businessRow.querySelector("[data-bbm-business-address]")) return true;
+
+    var address = create(
+      "span",
+      "",
+      "사업장 소재지 : 인천광역시 서구 원석로 54 (석남동)"
+    );
+    address.setAttribute("data-bbm-business-address", "true");
+
+    var divider = create("i", "", "|");
+    divider.setAttribute("aria-hidden", "true");
+
+    var tradeNumber = Array.from(businessRow.querySelectorAll("span")).find(function (span) {
+      return span.textContent.indexOf("통신판매업") !== -1;
+    });
+    if (tradeNumber) tradeNumber.after(divider, address);
+    else businessRow.append(divider, address);
+    return true;
+  }
+
   function buildBrandSection() {
     var section = create("section", "bbm-brand-section");
     section.id = "brand";
@@ -57,9 +85,11 @@
 
   function mount() {
     updateBrandLogos();
+    var addressReady = updateBusinessAddress();
 
     var stores = document.getElementById("stores");
-    if (!stores || stores.dataset.brandSplit === "true") return Boolean(stores);
+    if (!stores) return false;
+    if (stores.dataset.brandSplit === "true") return addressReady;
 
     var storeTitle = stores.querySelector("#store-finder-title");
     var heading = storeTitle && storeTitle.parentElement;
@@ -82,7 +112,7 @@
     stores.parentNode.insertBefore(brand, stores);
     stores.dataset.brandSplit = "true";
     reveal(brand);
-    return true;
+    return addressReady;
   }
 
   if (!mount()) {
