@@ -48,6 +48,29 @@
     return true;
   }
 
+  function updateSiteIdentity() {
+    var footer = document.querySelector("footer");
+    if (!footer) return false;
+
+    var siteRow = Array.from(footer.querySelectorAll("p")).find(function (row) {
+      return row.textContent.indexOf("공식사이트") !== -1;
+    });
+    if (siteRow) siteRow.textContent = "사이트명 : 버블몬";
+
+    var businessRow = Array.from(footer.querySelectorAll("p")).find(function (row) {
+      return row.textContent.indexOf("상호 :") !== -1 || row.textContent.indexOf("상호명 :") !== -1;
+    });
+    if (!businessRow) return false;
+
+    var businessName = Array.from(businessRow.querySelectorAll("span")).find(function (span) {
+      return span.textContent.indexOf("상호") !== -1;
+    });
+    if (businessName) businessName.textContent = "상호명 : 버블몬코리아 주식회사";
+    else businessRow.firstChild.textContent = "상호명 : 버블몬코리아 주식회사";
+
+    return Boolean(siteRow);
+  }
+
   function buildBrandSection() {
     var section = create("section", "bbm-brand-section");
     section.id = "brand";
@@ -86,10 +109,11 @@
   function mount() {
     updateBrandLogos();
     var addressReady = updateBusinessAddress();
+    var identityReady = updateSiteIdentity();
 
     var stores = document.getElementById("stores");
     if (!stores) return false;
-    if (stores.dataset.brandSplit === "true") return addressReady;
+    if (stores.dataset.brandSplit === "true") return addressReady && identityReady;
 
     var storeTitle = stores.querySelector("#store-finder-title");
     var heading = storeTitle && storeTitle.parentElement;
@@ -112,7 +136,7 @@
     stores.parentNode.insertBefore(brand, stores);
     stores.dataset.brandSplit = "true";
     reveal(brand);
-    return addressReady;
+    return addressReady && identityReady;
   }
 
   if (!mount()) {
