@@ -1,0 +1,134 @@
+.bbm-brand-home,
+.bbm-guide {
+  --bbm-orange: #f39800;
+  --bbm-white: #f5f5f7;
+  --bbm-muted: #b4b4b8;
+  box-sizing: border-box;
+  color: var(--bbm-white);
+  background: #000;
+  font-family: 'SF Pro KR', 'SF Pro Display', 'Apple SD Gothic Neo', Pretendard,
+    'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.bbm-brand-home *, .bbm-guide * { box-sizing: border-box; }
+.bbm-brand-home { padding: 84px clamp(22px, 5vw, 72px) 30px; }
+.bbm-brand-home__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: min(100%, 1120px);
+  margin: 0 auto;
+}
+.bbm-brand-home h1 {
+  margin: 0;
+  font-size: clamp(24px, 2.8vw, 34px);
+  font-weight: 700;
+  letter-spacing: -.045em;
+  line-height: 1.25;
+}
+.bbm-brand-home p {
+  max-width: 620px;
+  margin: 12px 0 0;
+  color: var(--bbm-muted);
+  font-size: 14px;
+  line-height: 1.75;
+  word-break: keep-all;
+}
+.bbm-brand-nav { display: flex; flex-wrap: wrap; gap: 14px 22px; }
+.bbm-brand-nav a {
+  padding: 8px 0;
+  color: #f5f5f7;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.bbm-brand-nav a:hover { color: #f39800; }
+.bbm-brand-nav a:focus-visible, .bbm-guide a:focus-visible,
+.bbm-guide summary:focus-visible { outline: 2px solid #f39800; outline-offset: 5px; }
+#official-channels .bbm-official-sites__inner { align-items: start; }
+
+#top .bbm-product-heading {
+  color: #f4c16f;
+  letter-spacing: -.09em;
+  white-space: nowrap;
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(105deg,#f8ddb0 4%,#dba64e 47%,#f0bf66 68%,#b87b27 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  margin: 0 auto;
+  font-size: clamp(104px,14.2vw,252px);
+  font-weight: 800;
+  line-height: .76;
+}
+
+.bbm-guide { margin: 0; min-height: 100vh; }
+.bbm-guide__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 30px clamp(22px, 5vw, 60px);
+  border-bottom: 1px solid #ffffff24;
+}
+.bbm-guide__logo img { display: block; width: 138px; height: auto; filter: brightness(0) invert(1); }
+.bbm-guide__main { width: min(100%, 1120px); margin: 0 auto; padding: 72px 24px 96px; }
+.bbm-guide__hero { max-width: 800px; margin-bottom: 72px; }
+.bbm-guide__hero h1 {
+  margin: 0 0 24px;
+  font-size: clamp(38px, 5.5vw, 64px);
+  line-height: 1.18;
+  font-weight: 700;
+  letter-spacing: -.06em;
+  word-break: keep-all;
+}
+.bbm-guide p { color: #b4b4b8; font-size: 16px; line-height: 1.85; word-break: keep-all; }
+.bbm-guide__hero p { max-width: 720px; font-size: 18px; }
+.bbm-guide__section {
+  display: grid;
+  grid-template-columns: minmax(180px, .7fr) minmax(0, 1.5fr);
+  gap: 40px;
+  padding: 44px 0;
+  border-top: 1px solid #ffffff24;
+  scroll-margin-top: 24px;
+}
+.bbm-guide h2 { margin: 0; font-size: 28px; line-height: 1.35; letter-spacing: -.04em; }
+.bbm-guide h3 { margin: 0 0 10px; font-size: 20px; line-height: 1.5; }
+.bbm-guide__section p:first-child { margin-top: 0; }
+.bbm-guide a { color: #f39800; text-underline-offset: 5px; }
+.bbm-guide__products { display: grid; gap: 30px; }
+.bbm-guide__products article p { margin: 0 0 12px; }
+.bbm-guide__links { margin: 0; padding: 0; list-style: none; }
+.bbm-guide__links li { padding: 18px 0; border-bottom: 1px solid #ffffff18; }
+.bbm-guide__links li:first-child { padding-top: 0; }
+.bbm-guide__links p { margin: 6px 0 0; font-size: 14px; }
+.bbm-guide details { border-bottom: 1px solid #ffffff24; padding: 18px 0; }
+.bbm-guide details:first-child { padding-top: 0; }
+.bbm-guide summary { cursor: pointer; line-height: 1.6; font-weight: 600; }
+.bbm-guide details p { margin: 12px 0 0; }
+.bbm-guide__business { margin: 24px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 10px 18px; font-size: 14px; line-height: 1.65; }
+.bbm-guide__business dt { color: #b4b4b8; }
+.bbm-guide__business dd { margin: 0; overflow-wrap: anywhere; }
+.bbm-guide__footer { padding: 32px 24px; border-top: 1px solid #ffffff24; text-align: center; }
+.bbm-guide__footer p { margin: 8px 0; font-size: 13px; }
+
+@media (max-width: 900px) {
+  .bbm-brand-home__inner { align-items: flex-start; flex-direction: column; gap: 12px; }
+  #top .bbm-product-heading { letter-spacing: -.095em; font-size: clamp(64px,17.4vw,100px); }
+}
+@media (max-width: 600px) {
+  .bbm-brand-home { padding: 80px 22px 20px; }
+  .bbm-desktop-break { display: none; }
+  .bbm-brand-nav { gap: 8px 20px; }
+  .bbm-guide__header { flex-direction: column; align-items: flex-start; gap: 16px; padding: 24px; }
+  .bbm-guide__main { padding-top: 48px; padding-bottom: 64px; }
+  .bbm-guide__hero { margin-bottom: 48px; }
+  .bbm-guide__hero p { font-size: 16px; }
+  .bbm-guide__section { grid-template-columns: 1fr; gap: 24px; padding: 32px 0; }
+  .bbm-guide h2 { font-size: 25px; }
+  .bbm-guide__business { grid-template-columns: 1fr; gap: 4px; }
+  .bbm-guide__business dd { margin-bottom: 12px; }
+}

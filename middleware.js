@@ -13,6 +13,12 @@ export const config = {
     '/adult.html',
     '/graffiti3',
     '/graffiti3.html',
+    '/index',
+    '/index.html',
+    '/brand',
+    '/brand.html',
+    '/bubblemon',
+    '/bubblemon.html',
     '/robots.txt',
     '/sitemap.xml',
   ],
@@ -21,6 +27,7 @@ export const config = {
 const AGE_COOKIE = 'bbm_adult';
 const BBMKR_PROTECTED_PATHS = new Set(['/', '/naver', '/naver.html', '/graffiti3', '/graffiti3.html']);
 const BBMKR_GATE_PATHS = new Set(['/adult', '/adult.html']);
+const WEVAPE_HOME_ALIASES = new Set(['/index', '/index.html', '/brand', '/brand.html', '/graffiti3', '/graffiti3.html']);
 
 const HOST_ROUTES = {
   'wevapekorea.co.kr': {
@@ -98,6 +105,19 @@ function nextResponse() {
 export default async function middleware(request) {
   const host = (request.headers.get('host') || '').toLowerCase().replace(/^www\./, '');
   const url = new URL(request.url);
+
+  if (host === 'wevapekorea.co.kr' && WEVAPE_HOME_ALIASES.has(url.pathname)) {
+    // Consolidate duplicate home URLs while retaining campaign query parameters.
+    url.hostname = 'www.wevapekorea.co.kr';
+    url.pathname = '/';
+    return Response.redirect(url, 308);
+  }
+
+  if (host !== 'wevapekorea.co.kr' && ['/bubblemon', '/bubblemon.html'].includes(url.pathname)) {
+    url.hostname = 'www.wevapekorea.co.kr';
+    url.pathname = '/bubblemon';
+    return Response.redirect(url, 308);
+  }
 
   if (host === 'bbmkr.store') {
     const hasAdultAccess = await hasAdultSession(request);
